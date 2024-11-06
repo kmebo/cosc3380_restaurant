@@ -9,7 +9,7 @@ body{
 
 .menu-grid{
     margin: auto;
-    width: 15vw;
+    width: 10vw;
     font-size: 2rem;
 }
 
@@ -18,11 +18,27 @@ table, th, td{
     border-left: 1;
     border-right: 1;
     border-collapse: collapse;
+    overflow: auto;
 }
 
 .menu-header{
-    font-size: 2rem;
+    font-size: 3rem;
     text-align: center;
+    margin-bottom: 0;
+}
+
+.order-button{
+    width: 40px;
+    display: block;
+    margin: auto;
+}
+
+.submit-button{
+    margin-top: 3px;
+}
+
+.submit-button:hover{
+    cursor: pointer;
 }
 
 th{

@@ -21,12 +21,12 @@ const pool = new Pool({
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Fetch name and price attributes from menu table
+// Select all attributes from menu table
 app.get('/menu', async(req, res) => {
     const {name} = req.body;
     const {price} = req.body;
     try{
-        const result = await pool.query('SELECT name, price FROM T1');
+        const result = await pool.query('SELECT * FROM T1');
         res.json(result.rows);
     } catch(err){
         console.error(err.message);
