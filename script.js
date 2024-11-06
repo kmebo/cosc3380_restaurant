@@ -1,3 +1,4 @@
+// Fetches our api call '/menu'
 async function fetchMenu() {
     try{
         const response = await fetch('http://localhost:3000/menu');
@@ -14,6 +15,7 @@ async function fetchMenu() {
     }
 }
 
+// Loops through our menu data to create and append the data to our html table for display
 function displayMenu(menuData){
     const menuTable = document.getElementById('menuTable');
 
@@ -31,4 +33,5 @@ function displayMenu(menuData){
     });
 }
 
+// Loads our menu on site loadup
 window.onload = fetchMenu;

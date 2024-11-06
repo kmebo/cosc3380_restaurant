@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.use(cors());
 const PORT = 3000;
 
+// Database connection
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
@@ -20,7 +21,7 @@ const pool = new Pool({
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Fetch all items from menu
+// Fetch name and price attributes from menu table
 app.get('/menu', async(req, res) => {
     const {name} = req.body;
     const {price} = req.body;
@@ -44,4 +45,5 @@ pool.connect((err, client, release) => {
     release();
 });
 
+// Testing server port connection
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

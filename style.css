@@ -15,15 +15,14 @@ body{
 
 table, th, td{
     border: 1px solid #c4dcf3;
-    border-left: 0;
-    border-right: 0;
+    border-left: 1;
+    border-right: 1;
     border-collapse: collapse;
 }
 
 .menu-header{
-    justify-content: center;
-    align-items: center;
     font-size: 2rem;
+    text-align: center;
 }
 
 th{
