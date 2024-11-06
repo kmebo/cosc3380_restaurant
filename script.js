@@ -8,7 +8,7 @@ async function fetchMenu() {
         }
 
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         displayMenu(data);
     }catch(error){
         console.log('Error with fetching data: ', error);
@@ -38,7 +38,7 @@ function displayMenu(menuData){
         buttonInput.id = 'orderButton';
         buttonInput.min = '0';
         buttonInput.max = '100';
-        buttonInput.classList.add('order-button');
+        buttonInput.classList.add('order-button', 'input-button');
         buttonSubmit.classList.add('order-button', 'submit-button');
         buttonElement.appendChild(buttonInput);
         buttonElement.appendChild(buttonSubmit);
@@ -47,6 +47,13 @@ function displayMenu(menuData){
         menuTable.appendChild(row);
     });
 }
+
+document.getElementById('resetButton').addEventListener('click', function(){
+    const numberInputs = document.getElementsByClassName('input-button');
+    const inputArr = Array.from(numberInputs);
+    inputArr.forEach(input => input.value = 0);
+    //console.log('test');
+});
 
 // Loads our menu on site loadup
 window.onload = fetchMenu;

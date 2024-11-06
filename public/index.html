@@ -7,9 +7,9 @@
     <title>Restaurant</title>
   </head>
   <body>
-    <div class="table-container">
+    <div class="menu-container">
       <h1 class="menu-header">Menu</h1>
-      <table class="menu-grid">
+      <table class="menu-grid" id="table">
         <thead>
           <tr>
             <th>Item</th>
@@ -19,6 +19,16 @@
         </thead>
         <tbody id="menuTable"></tbody>
       </table>
+    </div>
+    <div class="price-container">
+      <h2>Total Cost:</h2>
+      <input
+        type="submit"
+        value="Checkout"
+        id="checkoutButton"
+        class="checkout-button"
+      />
+      <input type="reset" class="checkout-button" id="resetButton" />
     </div>
     <script src="/script.js"></script>
   </body>

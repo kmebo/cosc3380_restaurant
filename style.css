@@ -13,6 +13,18 @@ body{
     font-size: 2rem;
 }
 
+.price-container{
+    width: 40vw;
+    margin: auto;
+}
+
+h2{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: #cdd0d1;
+}
+
 table, th, td{
     border: 1px solid #c4dcf3;
     border-left: 1;
@@ -35,6 +47,10 @@ table, th, td{
 
 .submit-button{
     margin-top: 3px;
+}
+
+.checkout-button:hover{
+    cursor: pointer;
 }
 
 .submit-button:hover{
@@ -61,4 +77,10 @@ td{
 
 tfoot{
     text-align: left;
+}
+
+@media  screen and (min-width: 768px){
+    .price-container{
+        width: 14.6vw;
+    }
 }
