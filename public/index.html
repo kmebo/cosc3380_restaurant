@@ -5,7 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
     <title>Restaurant</title>
+    
+    <style>
+      .table-container {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 20px;
+      }
+
+      table {
+          border-collapse: collapse;
+          width: 30%;
+      }
+
+      th, td {
+          padding: 8px;
+          text-align: left;
+          border: 1px solid #ddd;
+      }
+
+      th {
+          background-color: black;
+      }
+
+      .form-container {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 20px;
+      }
+    </style>
   </head>
+
   <body>
     <div class="menu-container">
       <h1 class="menu-header">Menu</h1>
@@ -20,6 +51,7 @@
         <tbody id="menuTable"></tbody>
       </table>
     </div>
+
     <div class="price-container">
       <h2>Total Cost:</h2>
       <input
@@ -30,6 +62,55 @@
       />
       <input type="reset" class="checkout-button" id="resetButton" />
     </div>
+
+
+    <h1>Restaurant Inside Operations Info</h1>
+    <div class="table-container">
+      <!-- Employee Table -->
+        <div>
+          <h2>Employee</h2>
+          <table>
+              <thead>
+                  <tr>
+                      <th>"employee_id"</th>
+                      <th>ssn</th>
+                      <th>position</th>
+                      <th>first_name</th>
+                      <th>last_name</th>
+                      <th>email</th>
+                      <th>birth_date</th>
+                      <th>department</th>
+                      <th>hire_date</th>
+                  </tr>
+              </thead>
+              <tbody id="employeeTable"></tbody>
+          </table>
+        </div>
+
+        <!-- Department List Table -->
+        <div>
+            <h2>Department</h2>
+            <table>
+                <thead>
+                    <tr><th>ID</th><th>Name</th></tr>
+                </thead>
+                <tbody id="departmentTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Finances List Table -->
+         <div>
+            <h2>Finances</h2>
+            <table>
+                <thead>
+                    <tr><th>Course ID</th><th>Course Name</th></tr>
+                </thead>
+                <tbody id="FinancesTable"></tbody>
+            </table>
+          </div>
+    </div>
+
     <script src="/script.js"></script>
   </body>
+
 </html>
