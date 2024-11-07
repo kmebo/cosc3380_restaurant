@@ -10,6 +10,7 @@ app.use(cors());
 const PORT = 3000;
 
 // Database connection
+// Change as need for your local database
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
@@ -45,7 +46,7 @@ app.get('/employees', async (req, res) => {
     }
 });
 
-// Testing database connection
+// Testing database connection is successful
 pool.connect((err, client, release) => {
     if (err) {
         console.error('Failed to connect to the database:', err.stack);

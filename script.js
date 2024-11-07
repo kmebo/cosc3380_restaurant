@@ -16,17 +16,19 @@ async function fetchMenu() {
 // Loops through our menu data to create and append the data to our html table for display
 function displayMenu(menuData){
     const menuTable = document.getElementById('menuTable');
-
+    // Loop for our menu data we fetched from server.js
     menuData.forEach(item => {
         const row = document.createElement('tr');
+        // Creates a new 'td' for our table and sets the appropriate name from our menu data
         const nameElement = document.createElement('td');
         nameElement.textContent = item.name;
         row.appendChild(nameElement);
-
+        // Creates a new 'td' for our table and sets the appropriate price from our menu data
         const priceElement = document.createElement('td');
         priceElement.textContent = `$${item.price}`;
         row.appendChild(priceElement);
-
+        // Two buttons created and added to our table used to select quantity and purchase for the menu
+        // *REMINDER* See if I can move some of this to index.html later for decluttering of function
         const buttonElement = document.createElement('td')
         const buttonInput = document.createElement('input');
         const buttonSubmit = document.createElement('input');
@@ -41,7 +43,7 @@ function displayMenu(menuData){
         buttonElement.appendChild(buttonInput);
         buttonElement.appendChild(buttonSubmit);
         row.appendChild(buttonElement);
-
+        
         menuTable.appendChild(row);
     });
 }
