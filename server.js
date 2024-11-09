@@ -21,24 +21,54 @@ const pool = new Pool({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// Select all attributes from menu table
-app.get('/menu', async(req, res) => {
-    const {name} = req.body;
-    const {price} = req.body;
-    try{
-        const result = await pool.query('SELECT * FROM T1');
+// Fetch Employee attributes from database
+app.get('/employees', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM employee');
         res.json(result.rows);
-    } catch(err){
+    } catch (err) {
         console.error(err.message);
         res.sendStatus(500);
     }
 });
 
-// Fetch Employee attributes from database
-app.get('/employees', async (req, res) => {
+// Fetch returant attributes from database
+app.get('/restaurants', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM employee');
+        const result = await pool.query('SELECT * FROM resturant');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
+
+// Fetch inventory attributes from database
+app.get('/inventory', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM inventory');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
+
+// Fetch customer attributes from database
+app.get('/customers', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM customer');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
+
+// Fetch orders attributes from database
+app.get('/orders', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM orders');
         res.json(result.rows);
     } catch (err) {
         console.error(err.message);
