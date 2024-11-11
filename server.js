@@ -15,11 +15,22 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'hw4_test',
-    password: '1234',
+    password: 'desecrationsmile373',
     port: 5432,
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Fetch Menu attributes from database
+app.get('/menu', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM menu');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
 
 // Fetch Employee attributes from database
 app.get('/employees', async (req, res) => {

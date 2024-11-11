@@ -19,10 +19,19 @@ function displayMenu(menuData){
     // Loop for our menu data we fetched from server.js
     menuData.forEach(item => {
         const row = document.createElement('tr');
+        // Creates a new 'td' for our table and sets the appropriate category from our menu data
+        const categoryElement = document.createElement('td');
+        categoryElement.textContent = item.category;
+        row.appendChild(categoryElement);
         // Creates a new 'td' for our table and sets the appropriate name from our menu data
         const nameElement = document.createElement('td');
-        nameElement.textContent = item.name;
+        nameElement.textContent = item.item_name;
         row.appendChild(nameElement);
+        // Creates a new 'td' for our table and sets the appropriate description from our menu data
+        const descriptionElement = document.createElement('td');
+        descriptionElement.textContent = item.description;
+        descriptionElement.setAttribute('class', 'description-cell')
+        row.appendChild(descriptionElement);
         // Creates a new 'td' for our table and sets the appropriate price from our menu data
         const priceElement = document.createElement('td');
         priceElement.textContent = `$${item.price}`;

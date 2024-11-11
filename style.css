@@ -79,6 +79,10 @@ tfoot{
     text-align: left;
 }
 
+.description-cell{
+    font-size: small;
+}
+
 @media  screen and (min-width: 768px){
     .price-container{
         width: 14.6vw;
