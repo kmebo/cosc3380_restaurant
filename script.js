@@ -44,7 +44,6 @@ function displayMenu(menuData){
         buttonSubmit.type = 'submit';
         buttonSubmit.value = 'Buy';
         buttonInput.type = 'number';
-        buttonInput.id = 'orderButton';
         buttonInput.min = '0';
         buttonInput.max = '100';
         buttonInput.classList.add('order-button', 'input-button');
