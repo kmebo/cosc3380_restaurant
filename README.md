@@ -17,3 +17,5 @@ Steps for Setup
      npm install cors        https://www.npmjs.com/package/cors
      npm install path        https://www.npmjs.com/package/path
      npm install pg          https://www.npmjs.com/package/pg
+5) To run the server, type in the terminal
+         node server.js
