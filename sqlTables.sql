@@ -335,3 +335,22 @@ VALUES (
     );
 SELECT *
 FROM menu;
+CREATE TABLE order_items(
+order_item_id SERIAL PRIMARY KEY,
+order_id INT,
+menu_item_id INT,
+amount INT,
+cost FLOAT,
+FOREIGN KEY (order_id) REFERENCES orders(order_id),
+FOREIGN KEY (menu_item_id) REFERENCES menu(item_id)
+);
+SELECT *
+FROM order_items;
+CREATE TABLE reservation(
+customer_id SERIAL PRIMARY KEY,
+store_location INT,
+reservation_time TIME,
+reservation_date DATE,
+guests INT,
+FOREIGN KEY store_location REFERENCES resturant(location)
+);
