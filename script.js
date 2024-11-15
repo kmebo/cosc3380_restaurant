@@ -57,6 +57,87 @@ function displayMenu(menuData){
 }
 
 
+// CRUD operation for fetching Restaurant data
+async function fetchRestaurant() {
+    const response = await fetch('http://localhost:3000/restaurants');
+    const restaurants = await response.json();
+    const table = document.getElementById('restaurantTable');
+    table.innerHTML = '';
+    restaurants.forEach(restaurant => {
+        const row = `<tr>
+                        <td>${restaurant.store_id}</td>
+                        <td>${restaurant.location}</td>
+                        <td>${new Date(restaurant.open_date).toLocaleDateString()}</td>
+                        <td>${restaurant.sales}</td>
+                        <td>${restaurant.total_customers}</td>
+                        <td>${restaurant.owner}</td>
+                        <td>${restaurant.manager}</td>
+                    </tr>`;
+        table.innerHTML += row;
+    });
+}
+
+
+// CRUD operation for fetching Inventory data
+async function fetchInventory() {
+    const response = await fetch('http://localhost:3000/inventory');
+    const inventoryItems = await response.json();
+    const table = document.getElementById('inventoryTable');
+    table.innerHTML = '';
+    inventoryItems.forEach(item => {
+        const row = `<tr>
+                        <td>${item.item_id}</td>
+                        <td>${item.item_name}</td>
+                        <td>${item.item_amount}</td>
+                        <td>${item.location}</td>
+                        <td>${new Date(item.last_restocked).toLocaleDateString()}</td>
+                    </tr>`;
+        table.innerHTML += row;
+    });
+}
+
+
+// CRUD operation for fetching Customer data
+async function fetchCustomer() {
+    const response = await fetch('http://localhost:3000/customers');
+    const customers = await response.json();
+    const table = document.getElementById('customerTable');
+    table.innerHTML = '';
+    customers.forEach(customer => {
+        const row = `<tr>
+                        <td>${customer.customer_id}</td>
+                        <td>${customer.first_name}</td>
+                        <td>${customer.last_name}</td>
+                        <td>${customer.email}</td>
+                        <td>${customer.phone}</td>
+                    </tr>`;
+        table.innerHTML += row;
+    });
+}
+
+
+// CRUD operation for fetching Orders data
+async function fetchOrders() {
+    const response = await fetch('http://localhost:3000/orders');
+    const orders = await response.json();
+    const table = document.getElementById('ordersTable');
+    table.innerHTML = '';
+    orders.forEach(order => {
+        const row = `<tr>
+                        <td>${order.order_id}</td>
+                        <td>${order.customer_id}</td>
+                        <td>${order.item_id}</td>
+                        <td>${order.time_ordered}</td>
+                        <td>${order.server_id}</td>
+                        <td>${order.total_cost}</td>
+                        <td>${order.location}</td>
+                    </tr>`;
+        table.innerHTML += row;
+    });
+}
+
+
+
 // CRUD operations for fetching Employee
 async function fetchEmployee() {
     const response = await fetch('http://localhost:3000/employees');
@@ -91,4 +172,8 @@ document.getElementById('resetButton').addEventListener('click', function(){
 window.onload = function() {
     fetchMenu();
     fetchEmployee();
+    fetchRestaurant()
+    fetchInventory()
+    fetchCustomer()
+    fetchOrders()
 };
