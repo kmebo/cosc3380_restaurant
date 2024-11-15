@@ -7,12 +7,6 @@ body{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.menu-grid{
-    margin: auto;
-    width: 10vw;
-    font-size: 2rem;
-}
-
 .price-container{
     width: 40vw;
     margin: auto;
@@ -88,3 +82,85 @@ tfoot{
         width: 14.6vw;
     }
 }
+
+/* Basic styles to reset some default margin/padding */
+  
+  /* Container for the layout */
+  .container {
+    display: flex;
+    justify-content: space-between; /* Ensures items are spread out across the container */
+    gap: 20px;  /* Adds space between menu and order sections */
+    padding: 20px;
+    flex-wrap: wrap;  /* Allows content to wrap on small screens */
+  }
+  
+  /* Styling the Menu section */
+  .menu-container {
+    flex: 1;
+    max-width: 60%; /* Makes sure the menu doesn't occupy more than 60% */
+    margin-right: 20px;
+  }
+  
+  .menu-grid {
+    width: 90%;
+    border-collapse: collapse;
+  }
+  
+  
+  /* Styling the Order and Total Cost section */
+  
+  .order-container {
+    flex-grow: 1;
+    margin-bottom: 20px;
+  }
+  
+  #orderTable {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #orderTable th, #orderTable td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #totalCost {
+    font-size: 1.5em;
+    margin: 10px 0;
+  }
+  
+  .checkout-button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+  #resetButton {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+  }
+  

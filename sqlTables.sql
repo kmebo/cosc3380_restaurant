@@ -1,3 +1,18 @@
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_items (
+    id SERIAL PRIMARY KEY,
+    order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+    item_id INTEGER NOT NULL,
+    item_name VARCHAR(255),
+    quantity INTEGER,
+    price DECIMAL(10, 2),
+    total DECIMAL(10, 2) AS (quantity * price) STORED
+);
+
 CREATE TABLE resturant (
     store_id SERIAL PRIMARY KEY,
     location VARCHAR(20),
@@ -41,6 +56,7 @@ VALUES (
     );
 SELECT *
 FROM resturant;
+
 CREATE TABLE inventory (
     item_id SERIAL PRIMARY KEY,
     item_name VARCHAR(20),
@@ -61,6 +77,7 @@ VALUES ('Apple', 100, 'Houston', '2024-10-15'),
     ('Watermelon', 20, 'Houston', '2024-11-07');
 SELECT *
 FROM inventory;
+
 CREATE TABLE customer(
     customer_id SERIAL PRIMARY KEY,
     first_name VARCHAR(15),
@@ -101,32 +118,34 @@ VALUES (
     );
 SELECT *
 FROM customer;
-CREATE TABLE orders(
-    order_id SERIAL PRIMARY KEY,
-    customer_id INT,
-    item_id INT,
-    time_ordered TIME,
-    server_id INT,
-    total_cost FLOAT,
-    location VARCHAR(20),
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
-    FOREIGN KEY (item_id) REFERENCES inventory(item_id)
-);
-INSERT INTO orders (
-        customer_id,
-        item_id,
-        time_ordered,
-        server_id,
-        total_cost,
-        location
-    )
-VALUES (1, 1, '14:30:00', 3, 45.99, 'Houston'),
-    (2, 2, '15:00:00', 4, 32.50, 'Austin'),
-    (3, 3, '15:30:00', 2, 58.75, 'Dallas'),
-    (4, 4, '16:00:00', 1, 22.99, 'Houston'),
-    (5, 5, '16:15:00', 5, 40.00, 'Austin');
-SELECT *
-FROM orders;
+
+-- CREATE TABLE orders(
+--     order_id SERIAL PRIMARY KEY,
+--     customer_id INT,
+--     item_id INT,
+--     time_ordered TIME,
+--     server_id INT,
+--     total_cost FLOAT,
+--     location VARCHAR(20),
+--     FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+--     FOREIGN KEY (item_id) REFERENCES inventory(item_id)
+-- );
+-- INSERT INTO orders (
+--         customer_id,
+--         item_id,
+--         time_ordered,
+--         server_id,
+--         total_cost,
+--         location
+--     )
+-- VALUES (1, 1, '14:30:00', 3, 45.99, 'Houston'),
+--     (2, 2, '15:00:00', 4, 32.50, 'Austin'),
+--     (3, 3, '15:30:00', 2, 58.75, 'Dallas'),
+--     (4, 4, '16:00:00', 1, 22.99, 'Houston'),
+--     (5, 5, '16:15:00', 5, 40.00, 'Austin');
+-- SELECT *
+-- FROM orders;
+
 CREATE TABLE employee(
     employee_id SERIAL PRIMARY KEY,
     ssn INT NOT NULL,
@@ -230,6 +249,7 @@ VALUES (
     );
 SELECT *
 FROM employee;
+
 CREATE TABLE menu(
     item_id SERIAL PRIMARY KEY,
     item_name VARCHAR(30),

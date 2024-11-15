@@ -1,0 +1,6 @@
+Step1: 
+To connect to/run the .js file use the command before starting the app: npm start
+
+Step:
+Assuming you are using the Live Server extension from VS Code.
+To run the app, go to the index.html file and do right click. Look for the 'Open with live server" and click it.

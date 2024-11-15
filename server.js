@@ -15,7 +15,7 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'hw4_test',
-    password: '1234',
+    password: "COSC3380Fall2024@!",
     port: 5432,
 });
 
@@ -31,6 +31,38 @@ app.get('/menu', async (req, res) => {
         res.sendStatus(500);
     }
 });
+// Submit Order to the database
+app.post('/submit-order', async (req, res) => {
+    const orderData = req.body;
+
+    try {
+        // Begin transaction
+        await pool.query('BEGIN');
+
+        // Insert new order
+        const orderResult = await pool.query('INSERT INTO orders DEFAULT VALUES RETURNING id');
+        const orderId = orderResult.rows[0].id;
+
+        // Insert items for the order
+        for (let item of orderData) {
+            await pool.query(
+                'INSERT INTO order_items (order_id, item_id, item_name, quantity, price) VALUES ($1, $2, $3, $4, $5)',
+                [orderId, item.item_id, item.item_name, item.quantity, item.price]
+            );
+        }
+
+        // Commit transaction
+        await pool.query('COMMIT');
+        res.status(200).json({ message: 'Order submitted successfully' });
+    } catch (err) {
+        // Rollback in case of error
+        await pool.query('ROLLBACK');
+        console.error(err.message);
+        res.status(500).json({ error: 'Failed to submit order' });
+    }
+});
+
+
 
 // Fetch Employee attributes from database
 app.get('/employees', async (req, res) => {

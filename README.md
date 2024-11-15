@@ -19,3 +19,8 @@ Steps for Setup
      npm install pg          https://www.npmjs.com/package/pg
 5) To run the server, type in the terminal
          node server.js
+
+
+Live Server:
+Assuming you are using the Live Server extension from VS Code.
+To run the app, go to the index.html file and do right click. Look for the 'Open with live server" and click it.
