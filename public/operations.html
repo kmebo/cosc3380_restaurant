@@ -1,10 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: center;
+        background-color: #333;
+        padding: 10px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        padding: 14px 20px;
+        margin: 0 10px;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+    .navbar a:hover {
+        background-color: #575757;
+    }
+
+    .menu-container,
+    .order-container,
+    .price-container,
+    .table-container {
+        padding: 20px;
+    }
+</style>
+
+<!-- Navigation Bar -->
+<div class="navbar">
+    <a href="index.html">Menu</a>
+    <a href="order.html">Order Summary</a>
+    <a href="operations.html">Operations</a>
+</div>
+
+<!-- Restaurant Inside Operations Info Section -->
+<div id="operations-info">
+    <h1>Restaurant Inside Operations Info</h1>
+    <div>
+        <h2>Employee</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>employee_id</th>
+                <th>ssn</th>
+                <th>position</th>
+                <th>first_name</th>
+                <th>last_name</th>
+                <th>email</th>
+                <th>birth_date</th>
+                <th>department</th>
+                <th>hire_date</th>
+            </tr>
+            </thead>
+            <tbody id="employeeTable"></tbody>
+        </table>
+    </div>
+
+    <div class="table-container">
+        <!-- Department List Table -->
+        <div>
+            <h2>Department</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody id="departmentTable"></tbody>
+            </table>
+        </div>
+
+        <!-- Finances List Table -->
+        <div>
+            <h2>Finances</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                </tr>
+                </thead>
+                <tbody id="FinancesTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
