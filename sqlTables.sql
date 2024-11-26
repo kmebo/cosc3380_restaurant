@@ -14,7 +14,7 @@ item_id SERIAL PRIMARY KEY,
 item_name VARCHAR(30),
 description TEXT,
 price FLOAT,
-category VARCHAR(10)
+category VARCHAR(15)
 );
 
 CREATE TABLE customer(
@@ -115,10 +115,34 @@ join_date DATE,
 points INT
 );
 
+INSERT INTO restaurant(store_id,location,open_date,sales,total_customers,owner,manager) VALUES
+(1,'Houston','2024-11-25',0,0,'Cameron','Isaac'),
+(2,'Tomball','2024-11-25',0,0,'Isaac','Cameron');
+
+
 INSERT INTO menu (item_name, description, price, category) VALUES
-('Margherita Pizza', 'Classic pizza with fresh basil and mozzarella', 9.99, 'Food'),
-('Caesar Salad', 'Crispy romaine with creamy Caesar dressing', 6.99, 'Food'),
-('Espresso', 'Rich and aromatic single shot of espresso', 2.99, 'Drink'),
+('Pizza', 'Classic pizza with mozzarella', 9.99, 'Main Course'),
+('Caesar Salad', 'Crispy romaine with creamy Caesar dressing', 6.99, 'Appetizer'),
+('Lasagna', 'Rich and cheesy lasagna made with in house sauce', 12.99, 'Main Course'),
 ('Cheesecake', 'Creamy cheesecake with a graham cracker crust', 4.99, 'Dessert'),
-('Lemonade', 'Freshly squeezed lemonade', 3.50, 'Drink'
+('Gelato', 'Soft and sweet vanilla gelato', 3.99, 'Dessert'),
+('Breadsticks', 'Fresh and hot breadsticks with butter', 3.50, 'Appetizer'
 );
+
+INSERT INTO inventory (item_name, item_amount, store_id, last_restocked) VALUES
+('Cheese', 99, 1, '2024-11-25'),
+('Sauce', 99, 1, '2024-11-25'),
+('Dough', 99, 1, '2024-11-25'),
+('Tomato', 99, 1, '2024-11-25'),
+('Pasta', 99, 1, '2024-11-25'),
+('Tomato', 99, 1, '2024-11-25'),
+('Lettuce', 99, 1, '2024-11-25'),
+('Dressing', 99, 1, '2024-11-25'),
+('Tomato', 99, 1, '2024-11-25'),
+('Cheesecake', 99, 1, '2024-11-25'),
+('Gelato', 99, 1, '2024-11-25'),
+('Bread', 99, 1, '2024-11-25'),
+('Butter', 99, 1, '2024-11-25');
+
+SELECT * FROM menu;
+SELECT * FROM inventory;

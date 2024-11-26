@@ -1,61 +1,84 @@
+let result
+
 // Fetches our api call '/menu'
-async function fetchMenu() {
+async function fetchTable(table) {
     try{
-        const response = await fetch('http://localhost:3000/menu');
+        const response = await fetch('http://localhost:3000/'+table); // This gets the specific table you want
         if(!response.ok){
             throw new Error('Network response was not ok'); 
         }
-        const data = await response.json();
-        //console.log(data);
-        displayMenu(data);
+        result = await response.json();
     }catch(error){
         console.log('Error with fetching data: ', error);
     }
 }
 
-// Loops through our menu data to create and append the data to our html table for display
-// function displayMenu(menuData){
-//     const menuTable = document.getElementById('menuTable');
-//     // Loop for our menu data we fetched from server.js
-//     menuData.forEach(item => {
-//         const row = document.createElement('tr');
-//         // Creates a new 'td' for our table and sets the appropriate category from our menu data
-//         const categoryElement = document.createElement('td');
-//         categoryElement.textContent = item.category;
-//         row.appendChild(categoryElement);
-//         // Creates a new 'td' for our table and sets the appropriate name from our menu data
-//         const nameElement = document.createElement('td');
-//         nameElement.textContent = item.item_name;
-//         row.appendChild(nameElement);
-//         // Creates a new 'td' for our table and sets the appropriate description from our menu data
-//         const descriptionElement = document.createElement('td');
-//         descriptionElement.textContent = item.description;
-//         descriptionElement.setAttribute('class', 'description-cell')
-//         row.appendChild(descriptionElement);
-//         // Creates a new 'td' for our table and sets the appropriate price from our menu data
-//         const priceElement = document.createElement('td');
-//         priceElement.textContent = `$${item.price}`;
-//         row.appendChild(priceElement);
-        
-//         // Two buttons created and added to our table used to select quantity and purchase for the menu
-//         // *REMINDER* See if I can move some of this to index.html later for decluttering of function
-//         const buttonElement = document.createElement('td')
-//         const buttonInput = document.createElement('input');
-//         const buttonSubmit = document.createElement('input');
-//         buttonSubmit.type = 'submit';
-//         buttonSubmit.value = 'Buy';
-//         buttonInput.type = 'number';
-//         buttonInput.min = '0';
-//         buttonInput.max = '100';
-//         buttonInput.classList.add('order-button', 'input-button');
-//         buttonSubmit.classList.add('order-button', 'submit-button');
-//         buttonElement.appendChild(buttonInput);
-//         buttonElement.appendChild(buttonSubmit);
-//         row.appendChild(buttonElement);
-        
-//         menuTable.appendChild(row);
-//     });
-// }
+// Get the button by ID and add an event listener
+
+const appetizerButton = document.getElementById("appetizer-button");
+const mainCourseButton = document.getElementById("main-course-button");
+const dessertButton = document.getElementById("dessert-button");
+
+appetizerButton.addEventListener("click", () => {
+    const items = document.querySelectorAll('.main-menu-item');
+    items.forEach((item) => {
+        item.style.visibility = "hidden";
+    })
+});
+
+mainCourseButton.addEventListener("click", () => {
+    //displayMenuItems(result,"Main Course")
+    const items = document.querySelectorAll('.main-menu-item');
+    items.forEach((item) => {
+        item.style.visibility = "visible";
+    })
+});
+
+dessertButton.addEventListener("click", () => {
+    const items = document.querySelectorAll('.main-menu-item');
+    items.forEach((item) => {
+        item.style.visibility = "hidden";
+    })
+});
+
+function displayMenuItems(result,type) {
+
+    const table = document.getElementById('menuTable');
+
+    table.innerHTML = ""
+
+    result.forEach(item => {
+
+        const row = document.createElement('tr');
+
+        if (item.category === type) {
+            // Category
+            //const categoryElement = document.createElement('td');
+            //categoryElement.textContent = item.category;
+            //row.appendChild(categoryElement);
+
+            // Item Name
+            const nameElement = document.createElement('td');
+            nameElement.textContent = item.item_name;
+            row.appendChild(nameElement);
+
+            // Description
+            const descriptionElement = document.createElement('td');
+            descriptionElement.textContent = item.description;
+            row.appendChild(descriptionElement);
+
+            // Price
+            const priceElement = document.createElement('td');
+            priceElement.textContent = `$${item.price}`;
+            row.appendChild(priceElement);
+
+            table.appendChild(row);
+        }
+    });
+
+    console.log(table);
+
+}
 
 function displayMenu(menuData) {
     const menuTable = document.getElementById('menuTable');
@@ -63,6 +86,9 @@ function displayMenu(menuData) {
     let orderData = [];
   
     menuData.forEach(item => {
+
+        console.log(item);
+
       const row = document.createElement('tr');
   
       // Category
@@ -292,10 +318,10 @@ async function fetchEmployee() {
 // Loads our menu on site loadup
 // window.onload = fetchMenu;
 window.onload = function() {
-    fetchMenu();
-    fetchEmployee();
-    fetchRestaurant()
-    fetchInventory()
-    fetchCustomer()
-    fetchOrders()
+    fetchTable("menu");
+    //fetchEmployee();
+    //fetchRestaurant()
+    //fetchInventory()
+    //fetchCustomer()
+    //fetchOrders()
 };

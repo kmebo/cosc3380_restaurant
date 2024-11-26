@@ -41,6 +41,18 @@
     .table-container {
       padding: 20px;
     }
+
+    .food-item {
+      display: inline-block;
+      width: 200px;
+      margin: 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+
   </style>
 
   <style>
@@ -80,6 +92,7 @@
 </head>
 
 <body>
+
 <!-- Navigation Bar -->
 <div class="navbar">
   <a href="#menu">Menu</a>
@@ -87,29 +100,36 @@
   <a href="operations.html">Operations</a>
 </div>
 
+<!-- Food Item Displays -->
+<div id="food-container"></div>
+
 <div class="submenu">
-  <a href="#appetizers">Appetizers</a>
-  <a href="#maincourse">Main Course</a>
-  <a href="#desserts">Desserts</a>
+  <button id="appetizer-button">Appetizers</button>
+  <button id="main-course-button">Main Course</button>
+  <button id="dessert-button">Desserts</button>
 </div>
 
-<!-- Menu Section -->
-<div class="menu-container" id="menu">
-  <h1 class="menu-header">Menu</h1>
-  <table class="menu-grid" id="table">
-    <thead>
-    <tr>
-      <th>Category</th>
-      <th>Item</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Order</th>
-    </tr>
-    </thead>
-    <tbody id="menuTable"></tbody>
-  </table>
+<div class="main-course-display">
+  <div class="menu-container">
+    <div class="main-menu-item">
+      <h3>Pizza</h3>
+      <img src="../node_modules/pizza.jpg" alt="Pizza" class="item-image">
+      <p class="item-description">A delicious pizza topped with cheese, pepperoni, and vegetables.</p>
+      <button id="pizza-button">Add to Cart</button>
+    </div>
+    <div class="main-menu-item">
+      <h3>Lasagna</h3>
+      <img src="../node_modules/lasagna.jpg" alt="Lasagna" class="item-image">
+      <p class="item-description">Yummy cheesy lasagna</p>
+      <button id="lasagna-button">Add to Cart</button>
+    </div>
+  </div>
 </div>
 
+<!-- Tables Definition DON'T FORGET TO DO THIS MY GOD-->
+<table id="menuTable">...</table>
+
+<!-- Scripts -->
 <script src="/script.js"></script>
 </body>
 </html>

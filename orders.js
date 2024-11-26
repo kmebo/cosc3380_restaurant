@@ -1,4 +1,8 @@
 
+storeId = 1 // Default
+
+cart = []
+
 // CRUD operation for fetching Orders data
 async function fetchOrders() {
     const response = await fetch('http://localhost:3000/orders');
@@ -22,4 +26,5 @@ async function fetchOrders() {
 
 window.onload = function() {
     fetchOrders()
+    console.log("here")
 };

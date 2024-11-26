@@ -21,6 +21,21 @@ const pool = new Pool({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+function getAllAvailableMenuItems(type) {
+    app.get('/menu', async (req, res) => {
+        try {
+            const result = await pool.query('SELECT * FROM menu WHERE category=' + type);
+            console.log(result.rows);
+            res.json(result.rows);
+        } catch (err) {
+            console.error(err.message);
+            res.sendStatus(500);
+        }
+    });
+}
+
+
+
 // Fetch Menu attributes from database
 app.get('/menu', async (req, res) => {
     try {
