@@ -245,7 +245,7 @@ tfoot{
     z-index: 1000; 
   }
   
-  .dropbtn {
+  .dropbutton {
     background-color: #4c4eaf; 
     color: white;
     padding: 12px 16px;
@@ -255,7 +255,7 @@ tfoot{
     cursor: pointer;
   }
   
-  .dropbtn:hover {
+  .dropbutton:hover {
     background-color: #4b45a0; 
   }
  
@@ -284,7 +284,6 @@ tfoot{
   .show {
     display: block;
   }
-  
   
   /* Mobile responsiveness */
   @media (max-width: 768px) {
