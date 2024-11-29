@@ -134,6 +134,17 @@ app.get('/orders', async (req, res) => {
     }
 });
 
+// Fetch store id for dropdown
+app.get('/stores', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT store_id, location FROM restaurant');
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error fetching stores:', err.message);
+        res.sendStatus(500);
+    }
+});
+
 // Testing database connection is successful
 pool.connect((err, client, release) => {
     if (err) {
