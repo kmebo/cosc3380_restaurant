@@ -15,7 +15,7 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'hw4_test',
-    password: "cameron18", // Default 1234
+    password: "1234", // Default 1234
     port: 5432,
 });
 
@@ -80,7 +80,7 @@ app.post('/submit-order', async (req, res) => {
 
 
 // Fetch Employee attributes from database
-app.get('/employees', async (req, res) => {
+app.get('/employee', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM employee');
         res.json(result.rows);
