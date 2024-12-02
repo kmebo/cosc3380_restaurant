@@ -52,16 +52,16 @@
 
     <!-- Order Summary Section -->
     <div class="order-container">
-      <h2>Your Order</h2>
+      <h2>Your items selected are:</h2>
       <table id="orderTable">
         <thead>
           <tr>
-            <th>Item</th>
+            <th>Obj. ID</th>
+            <th>Dish Name</th>
             <th>Quantity</th>
-            <th>Price</th>
           </tr>
         </thead>
-        <tbody id="orderBody"></tbody>
+        <tbody id="preorderTable"></tbody>
       </table>
     </div>
 
@@ -75,6 +75,18 @@
       />
       <input type="reset" class="checkout-button" id="resetButton" />
     </div>
+
+      <!-- Course CRUD Forms -->
+      <div class="form-container">
+        <h2>Update Dish Quantity</h2>
+        <input type="number" id="dishIdUpdate" placeholder="Obj. ID">
+        <input type="number" id="newQuantity" placeholder="New Quantity">
+        <button onclick="updateDishQuantity()">Update Dish Quantity</button>
+
+        <h2>Delete Dish</h2>
+        <input type="number" id="dishIdDelete" placeholder="Obj. ID">
+        <button onclick="deleteDish()">Delete Dish</button>
+      </div>
 
     <script src="orders.js"></script>
   </body>

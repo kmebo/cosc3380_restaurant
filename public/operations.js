@@ -1,6 +1,7 @@
 const employeeButton = document.getElementById('employee-button');
 const departmentButton = document.getElementById('department-button');
 const financesButton = document.getElementById('finances-button');
+const inventoryButton = document.getElementById('inventory-button');
 const addButton = document.getElementById('add-button');
 const removeButton = document.getElementById('remove-button');
 
@@ -16,6 +17,11 @@ employeeButton.addEventListener('click', () => {
     }
 
     items = document.getElementsByClassName('finances-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+
+    items = document.getElementsByClassName('inventory-container');
     for(let item of items){
         item.style.display = 'none';
     }
@@ -36,6 +42,11 @@ departmentButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'none';
     }
+
+    items = document.getElementsByClassName('inventory-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
 });
 
 financesButton.addEventListener('click', () => {
@@ -50,6 +61,33 @@ financesButton.addEventListener('click', () => {
     }
 
     items = document.getElementsByClassName('finances-container');
+    for(let item of items){
+        item.style.display = 'block';
+    }
+
+    items = document.getElementsByClassName('inventory-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+});
+
+inventoryButton.addEventListener('click', () => {
+    let items = document.getElementsByClassName('employee-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+    
+    items = document.getElementsByClassName('department-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+
+    items = document.getElementsByClassName('finances-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+
+    items = document.getElementsByClassName('inventory-container');
     for(let item of items){
         item.style.display = 'block';
     }
@@ -103,7 +141,26 @@ async function fetchEmployee() {
                         </tr>`;
       table.innerHTML += row;
     });
-  }
+}
+async function fetchInventory() {
+    const response = await fetch("http://localhost:3000/inventory");
+    const inventories = await response.json();
+    console.log(inventories);
+    const table = document.getElementById("InventoryTable");
+    table.innerHTML = "";
+    inventories.forEach((inventory) => {
+      const row = `<tr>
+                            <td>${inventory.item_id}</td>
+                            <td>${inventory.item_name}</td>
+                            <td>${inventory.item_amount}</td>
+                            <td>${inventory.store_id}</td>
+                            <td>${new Date(
+                                inventory.last_restocked
+                            ).toLocaleDateString()}</td>
+                        </tr>`;
+      table.innerHTML += row;
+    });
+}
 
   window.onload = function() {
     let items = document.getElementsByClassName('employee-container');
@@ -120,5 +177,11 @@ async function fetchEmployee() {
     for(let item of items){
         item.style.display = 'none';
     }
+
+    items = document.getElementsByClassName('inventory-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
     fetchEmployee();
+    fetchInventory();
 };

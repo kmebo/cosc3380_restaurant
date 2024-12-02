@@ -314,8 +314,42 @@ async function fetchOrders() {
 //     //console.log('test');
 // });
 
-// Loads our menu on site loadup
-// window.onload = fetchMenu;
+
+document.getElementById("pizza-button").addEventListener("click", function() {
+    // Get the quantity entered by the customer
+    var quantity = document.getElementById("pizza-quantity").value;
+  
+    // Ensure the quantity is a valid number
+    if (quantity >= 1 && quantity <= 100) {
+      console.log("Adding " + quantity + " pizzas to the cart.");
+      Add_preorder("pizza", quantity)
+
+    } else {
+      alert("Please enter a valid quantity between 1 to 100.");
+    }
+});
+
+  document.getElementById("breadsticks-button").addEventListener("click", function() {
+    // Get the quantity entered by the customer
+    var quantity = document.getElementById("breadsticks-quantity").value;
+  
+    // Ensure the quantity is a valid number
+    if (quantity >= 1 && quantity <= 100) {
+      console.log("Adding " + quantity + " breadsticks to the cart.");
+      Add_preorder("breadsticks", quantity)
+    } else {
+      alert("Please enter a valid quantity between 1 to 100.");
+    }
+  });
+
+  async function Add_preorder(item_name, quantity){
+      await fetch('http://localhost:3000/preorder', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: item_name, quantity: quantity })
+      });
+  }
+
 window.onload = function() {
     let items = document.querySelectorAll('.main-menu-item');
     items.forEach((item) => {
@@ -335,5 +369,3 @@ window.onload = function() {
     //fetchCustomer()
     //fetchOrders()
 };
-
-// window.onload = function() {};

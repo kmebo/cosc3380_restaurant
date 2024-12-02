@@ -123,6 +123,29 @@ app.get('/customers', async (req, res) => {
     }
 });
 
+// Fetch preorders attributes from database
+app.get('/preorder', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM preorder');
+        res.json(result.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
+// Update preorders attributes from database by ID
+app.put('/preorder/:obj_id', async (req, res) => {
+    const { obj_id } = req.params;
+    const { quantity } = req.body;
+    try {
+        await pool.query('UPDATE preorder SET quantity = $1 WHERE obj_id = $2;', [quantity, obj_id]);
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
+
 // Fetch orders attributes from database
 app.get('/orders', async (req, res) => {
     try {
@@ -142,6 +165,33 @@ app.get('/stores', async (req, res) => {
     } catch (err) {
         console.error('Error fetching stores:', err.message);
         res.sendStatus(500);
+    }
+});
+
+// Add a new pizza to the database
+app.post('/preorder', async (req, res) => {
+    const { name, quantity } = req.body;
+
+    // Simple validation
+    if (!name || !quantity || quantity < 1 || quantity > 100) {
+        return res.status(400).send('Invalid preorder data.');
+    }
+
+    try {
+        // Insert the pizza into the database, obj_id will be generated automatically
+        const result = await pool.query(
+            'INSERT INTO preorder (name, quantity) VALUES ($1, $2) RETURNING obj_id', 
+            [name, quantity]
+        );
+
+        // Get the generated obj_id
+        const obj_id = result.rows[0].obj_id;
+
+        // Send a response with the newly created obj_id
+        res.status(201).json({ obj_id, name, quantity });
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500); // Internal server error
     }
 });
 

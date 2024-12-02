@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS employee;
 DROP TABLE IF EXISTS inventory;
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS restaurant;
+DROP TABLE IF EXISTS preorder;
+
 CREATE TABLE menu(
     item_id SERIAL PRIMARY KEY,
     item_name VARCHAR(30),
@@ -103,6 +105,12 @@ CREATE TABLE customer_loyalty(
     join_date DATE,
     points INT
 );
+
+CREATE TABLE preorder( 
+obj_id SERIAL PRIMARY KEY, 
+name VARCHAR(255), 
+quantity INT );
+
 INSERT INTO restaurant(
         store_id,
         location,
