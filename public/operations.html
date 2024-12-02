@@ -4,6 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
+
+    <script>
+        // CRUD operations for fetching Employee
+        async function fetchEmployee() {
+            const response = await fetch('http://localhost:3000/employees');
+            const employees = await response.json();
+            const table = document.getElementById('employeeTable');
+            table.innerHTML = '';
+            employees.forEach(employee_ => {
+                const row = `<tr>
+                                <td>${employee_.employee_id}</td>
+                                <td>${employee_.ssn}</td>
+                                <td>${employee_.position}</td>
+                                <td>${employee_.first_name}</td>
+                                <td>${employee_.last_name}</td>
+                                <td>${employee_.email}</td>
+                                <td>${new Date(employee_.birth_date).toLocaleDateString()}</td>
+                                <td>${employee_.department}</td>
+                                <td>${new Date(employee_.hire_date).toLocaleDateString()}</td>
+                            </tr>`;
+                table.innerHTML += row;
+            });
+        }
+        <!-- window.onleoad = fetchEmploye; -->
+        window.onload = function() {
+            fetchEmployee();
+        };
+    </script>
+
 </head>
 <body>
 

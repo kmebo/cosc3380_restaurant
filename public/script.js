@@ -285,29 +285,6 @@ async function fetchOrders() {
 }
 
 
-
-// CRUD operations for fetching Employee
-async function fetchEmployee() {
-    const response = await fetch('http://localhost:3000/employees');
-    const employees = await response.json();
-    const table = document.getElementById('employeeTable');
-    table.innerHTML = '';
-    employees.forEach(employee_ => {
-        const row = `<tr>
-                        <td>${employee_.employee_id}</td>
-                        <td>${employee_.ssn}</td>
-                        <td>${employee_.position}</td>
-                        <td>${employee_.first_name}</td>
-                        <td>${employee_.last_name}</td>
-                        <td>${employee_.email}</td>
-                        <td>${new Date(employee_.birth_date).toLocaleDateString()}</td>
-                        <td>${employee_.department}</td>
-                        <td>${new Date(employee_.hire_date).toLocaleDateString()}</td>
-                    </tr>`;
-        table.innerHTML += row;
-    });
-}
-
 // document.getElementById('resetButton').addEventListener('click', function(){
 //     const numberInputs = document.getElementsByClassName('input-button');
 //     const inputArr = Array.from(numberInputs);
@@ -319,9 +296,11 @@ async function fetchEmployee() {
 // window.onload = fetchMenu;
 window.onload = function() {
     fetchTable("menu");
-    //fetchEmployee();
     //fetchRestaurant()
     //fetchInventory()
     //fetchCustomer()
     //fetchOrders()
 };
+
+// window.onload = function() {};
+
