@@ -35,13 +35,6 @@
         background-color: #575757;
       }
 
-      .menu-container,
-      .order-container,
-      .price-container,
-      .table-container {
-        padding: 20px;
-      }
-
       h2 {
         width: 8rem;
       }
@@ -72,10 +65,24 @@
         padding: 20px;
       }
 
-      #appetizers,
-      #maincourse,
-      #desserts {
-        margin-top: 20px;
+      #addEmployeeForm {
+        font-size: medium;
+      }
+
+      #removeEmployeeForm {
+        font-size: medium;
+      }
+
+      #addContainer {
+        display: none;
+      }
+
+      #removeContainer {
+        display: none;
+      }
+
+      h3 {
+        font-size: medium;
       }
     </style>
 
@@ -112,6 +119,85 @@
           </thead>
           <tbody id="employeeTable"></tbody>
         </table>
+        <div class="submenu">
+          <button id="add-button">Add</button>
+          <button id="remove-button">Remove</button>
+          <button id="edit-button">Edit</button>
+        </div>
+        <div class="crud-container, add-container" id="addContainer">
+          <h3>Add New Employee</h3>
+          <form id="addEmployeeForm">
+            <label for="ssn">SSN:</label>
+            <input type="text" id="ssn" name="ssn" required /><br /><br />
+
+            <label for="position">Position:</label>
+            <input
+              type="text"
+              id="position"
+              name="position"
+              required
+            /><br /><br />
+
+            <label for="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              required
+            /><br /><br />
+
+            <label for="lastName">Last Name:</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              required
+            /><br /><br />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required /><br /><br />
+
+            <label for="birthDate">Birth Date:</label>
+            <input
+              type="date"
+              id="birthDate"
+              name="birthDate"
+              required
+            /><br /><br />
+
+            <label for="hireDate">Hire Date:</label>
+            <input
+              type="date"
+              id="hireDate"
+              name="hireDate"
+              required
+            /><br /><br />
+
+            <label for="storeId">Store ID:</label>
+            <input
+              type="number"
+              id="storeId"
+              name="storeId"
+              required
+              min="1"
+            /><br /><br />
+
+            <button type="button" id="addEmployeeButton">Add Employee</button>
+          </form>
+        </div>
+        <div class="crud-container, remove-container" id="removeContainer">
+          <h3>Remove Employee By ID#</h3>
+          <form id="removeEmployeeForm">
+            <label for="employeeId">Employee ID:</label>
+            <input
+              type="number"
+              id="removeEmployeeId"
+              name="employeeId"
+              required
+              min="0"
+            /><br /><br />
+          </form>
+        </div>
       </div>
 
       <div class="table-container, department-container" id="department-Table">

@@ -1,8 +1,10 @@
-const employeeButton = document.getElementById("employee-button");
-const departmentButton = document.getElementById("department-button");
-const financesButton = document.getElementById("finances-button");
+const employeeButton = document.getElementById('employee-button');
+const departmentButton = document.getElementById('department-button');
+const financesButton = document.getElementById('finances-button');
+const addButton = document.getElementById('add-button');
+const removeButton = document.getElementById('remove-button');
 
-employeeButton.addEventListener("click", () => {
+employeeButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
     for(let item of items){
         item.style.display = 'block';
@@ -19,7 +21,7 @@ employeeButton.addEventListener("click", () => {
     }
 });
 
-departmentButton.addEventListener("click", () => {
+departmentButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
     for(let item of items){
         item.style.display = 'none';
@@ -36,7 +38,7 @@ departmentButton.addEventListener("click", () => {
     }
 });
 
-financesButton.addEventListener("click", () => {
+financesButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
     for(let item of items){
         item.style.display = 'none';
@@ -50,6 +52,30 @@ financesButton.addEventListener("click", () => {
     items = document.getElementsByClassName('finances-container');
     for(let item of items){
         item.style.display = 'block';
+    }
+});
+
+addButton.addEventListener('click', () => {
+    let items = document.getElementsByClassName('add-container');
+    for(let item of items){
+        item.style.display = 'block';
+    }
+
+    items = document.getElementsByClassName('remove-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+});
+
+removeButton.addEventListener('click', () => {
+    let items = document.getElementsByClassName('remove-container');
+    for(let item of items){
+        item.style.display = 'block';
+    }
+
+    items = document.getElementsByClassName('add-container');
+    for(let item of items){
+        item.style.display = 'none';
     }
 });
 
