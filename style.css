@@ -93,13 +93,16 @@ tfoot{
     padding: 20px;
     flex-wrap: wrap;  /* Allows content to wrap on small screens */
   }
-  
-  /* Styling the Menu section */
-  .menu-container {
-    flex: 1;
-    max-width: 60%; /* Makes sure the menu doesn't occupy more than 60% */
-    margin-right: 20px;
-  }
+
+    .menu-container {
+        display: flex;              /* Enables Flexbox layout */
+        flex-wrap: wrap;            /* Allows wrapping on smaller screens */
+        justify-content: center;  /* Aligns items to the right */
+        visibility: visible;        /* Ensure it is visible */
+        width: 100%;                /* Make it span the full width */
+        padding: 10px;              /* Optional padding */
+        background-color: #f9f9f9;  /* Optional for clarity */
+    }
   
   .menu-grid {
     width: 90%;
@@ -186,14 +189,36 @@ tfoot{
 
 /* Container for all menu items */
 .menu-container {
-    visibility: hidden;
+    visibility: visible;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;  /* Distribute items evenly */
+    justify-content: center;
 }
 
 .main-menu-item {
-    width: 200px;  /* Adjust width of each item */
+    width: 150px;  /* Adjust width of each item */
+    margin: 20px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.appetizer-menu-item {
+    width: 150px;
+    margin: 20px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.dessert-menu-item {
+    width: 150px;
     margin: 20px;
     text-align: center;
     padding: 10px;
@@ -238,15 +263,15 @@ tfoot{
 
 /* Dropdown container */
 .dropdown {
-    position: fixed; 
+    position: fixed;
     top: 10px;
     right: 10px;
     display: inline-block;
-    z-index: 1000; 
+    z-index: 1000;
   }
-  
+
   .dropbutton {
-    background-color: #4c4eaf; 
+    background-color: #4c4eaf;
     color: white;
     padding: 12px 16px;
     font-size: 16px;
@@ -254,21 +279,21 @@ tfoot{
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
   .dropbutton:hover {
-    background-color: #4b45a0; 
+    background-color: #4b45a0;
   }
- 
+
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9; 
+    background-color: #f9f9f9;
     min-width: 160px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    z-index: 1; 
+    z-index: 1;
   }
-  
+
   .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -276,11 +301,11 @@ tfoot{
     display: block;
     border-bottom: 1px solid #ddd;
   }
-  
+
   .dropdown-content a:hover {
     background-color: #f1f1f1;
   }
-  
+
   .show {
     display: block;
   }

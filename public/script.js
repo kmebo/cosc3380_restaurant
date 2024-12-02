@@ -5,7 +5,7 @@ async function fetchTable(table) {
     try{
         const response = await fetch('http://localhost:3000/'+table); // This gets the specific table you want
         if(!response.ok){
-            throw new Error('Network response was not ok'); 
+            throw new Error('Network response was not ok');
         }
         result = await response.json();
     }catch(error){
@@ -13,31 +13,53 @@ async function fetchTable(table) {
     }
 }
 
-// Get the button by ID and add an event listener
-
 const appetizerButton = document.getElementById("appetizer-button");
 const mainCourseButton = document.getElementById("main-course-button");
 const dessertButton = document.getElementById("dessert-button");
 
 appetizerButton.addEventListener("click", () => {
-    const items = document.querySelectorAll('.main-menu-item');
+    let items = document.querySelectorAll('.main-menu-item');
     items.forEach((item) => {
-        item.style.visibility = "hidden";
+        item.style.display = "none";
+    })
+    items = document.querySelectorAll('.appetizer-menu-item');
+    items.forEach((item) => {
+        item.style.display = "block";
+    })
+    items = document.querySelectorAll('.dessert-menu-item');
+    items.forEach((item) => {
+        item.style.display = "none";
     })
 });
 
 mainCourseButton.addEventListener("click", () => {
     //displayMenuItems(result,"Main Course")
-    const items = document.querySelectorAll('.main-menu-item');
+    let items = document.querySelectorAll('.main-menu-item');
     items.forEach((item) => {
-        item.style.visibility = "visible";
+        item.style.display = "block";
+    })
+    items = document.querySelectorAll('.appetizer-menu-item');
+    items.forEach((item) => {
+        item.style.display = "none";
+    })
+    items = document.querySelectorAll('.dessert-menu-item');
+    items.forEach((item) => {
+        item.style.display = "none";
     })
 });
 
 dessertButton.addEventListener("click", () => {
-    const items = document.querySelectorAll('.main-menu-item');
+    let items = document.querySelectorAll('.main-menu-item');
     items.forEach((item) => {
-        item.style.visibility = "hidden";
+        item.style.display = "none";
+    })
+    items = document.querySelectorAll('.dessert-menu-item');
+    items.forEach((item) => {
+        item.style.display = "block";
+    })
+    items = document.querySelectorAll('.appetizer-menu-item');
+    items.forEach((item) => {
+        item.style.display = "none";
     })
 });
 
@@ -84,125 +106,125 @@ function displayMenu(menuData) {
     const menuTable = document.getElementById('menuTable');
     const orderTable = document.getElementById('orderBody');
     let orderData = [];
-  
+
     menuData.forEach(item => {
 
         console.log(item);
 
-      const row = document.createElement('tr');
-  
-      // Category
-      const categoryElement = document.createElement('td');
-      categoryElement.textContent = item.category;
-      row.appendChild(categoryElement);
-  
-      // Item Name
-      const nameElement = document.createElement('td');
-      nameElement.textContent = item.item_name;
-      row.appendChild(nameElement);
-  
-      // Description
-      const descriptionElement = document.createElement('td');
-      descriptionElement.textContent = item.description;
-      row.appendChild(descriptionElement);
-  
-      // Price
-      const priceElement = document.createElement('td');
-      priceElement.textContent = `$${item.price}`;
-      row.appendChild(priceElement);
-  
-      // Order Quantity and Buttons
-      const buttonElement = document.createElement('td');
-      const quantityInput = document.createElement('input');
-      const buttonSubmit = document.createElement('input');
-      quantityInput.type = 'number';
-      quantityInput.min = '0';
-      quantityInput.max = '100';
-      quantityInput.classList.add('order-input');
-      buttonSubmit.type = 'button';
-      buttonSubmit.value = 'Add to Order';
-      buttonSubmit.classList.add('order-submit');
-      
-      // Add event listener for adding item to order
-      buttonSubmit.addEventListener('click', function() {
-        const quantity = parseInt(quantityInput.value);
-        if (quantity > 0) {
-          // Add item to orderData array
-          const orderItem = {
-            item_id: item.id,
-            item_name: item.item_name,
-            quantity: quantity,
-            price: item.price
-          };
-          orderData.push(orderItem);
-  
-          // Update order table
-          const orderRow = document.createElement('tr');
-          const itemCell = document.createElement('td');
-          const quantityCell = document.createElement('td');
-          const priceCell = document.createElement('td');
-          
-          itemCell.textContent = item.item_name;
-          quantityCell.textContent = quantity;
-          priceCell.textContent = `$${(item.price * quantity).toFixed(2)}`;
-          
-          orderRow.appendChild(itemCell);
-          orderRow.appendChild(quantityCell);
-          orderRow.appendChild(priceCell);
-          orderTable.appendChild(orderRow);
-  
-          // Update total cost
-          updateTotalCost();
-        }
-      });
-  
-      buttonElement.appendChild(quantityInput);
-      buttonElement.appendChild(buttonSubmit);
-      row.appendChild(buttonElement);
-  
-      menuTable.appendChild(row);
+        const row = document.createElement('tr');
+
+        // Category
+        const categoryElement = document.createElement('td');
+        categoryElement.textContent = item.category;
+        row.appendChild(categoryElement);
+
+        // Item Name
+        const nameElement = document.createElement('td');
+        nameElement.textContent = item.item_name;
+        row.appendChild(nameElement);
+
+        // Description
+        const descriptionElement = document.createElement('td');
+        descriptionElement.textContent = item.description;
+        row.appendChild(descriptionElement);
+
+        // Price
+        const priceElement = document.createElement('td');
+        priceElement.textContent = `$${item.price}`;
+        row.appendChild(priceElement);
+
+        // Order Quantity and Buttons
+        const buttonElement = document.createElement('td');
+        const quantityInput = document.createElement('input');
+        const buttonSubmit = document.createElement('input');
+        quantityInput.type = 'number';
+        quantityInput.min = '0';
+        quantityInput.max = '100';
+        quantityInput.classList.add('order-input');
+        buttonSubmit.type = 'button';
+        buttonSubmit.value = 'Add to Order';
+        buttonSubmit.classList.add('order-submit');
+
+        // Add event listener for adding item to order
+        buttonSubmit.addEventListener('click', function() {
+            const quantity = parseInt(quantityInput.value);
+            if (quantity > 0) {
+                // Add item to orderData array
+                const orderItem = {
+                    item_id: item.id,
+                    item_name: item.item_name,
+                    quantity: quantity,
+                    price: item.price
+                };
+                orderData.push(orderItem);
+
+                // Update order table
+                const orderRow = document.createElement('tr');
+                const itemCell = document.createElement('td');
+                const quantityCell = document.createElement('td');
+                const priceCell = document.createElement('td');
+
+                itemCell.textContent = item.item_name;
+                quantityCell.textContent = quantity;
+                priceCell.textContent = `$${(item.price * quantity).toFixed(2)}`;
+
+                orderRow.appendChild(itemCell);
+                orderRow.appendChild(quantityCell);
+                orderRow.appendChild(priceCell);
+                orderTable.appendChild(orderRow);
+
+                // Update total cost
+                updateTotalCost();
+            }
+        });
+
+        buttonElement.appendChild(quantityInput);
+        buttonElement.appendChild(buttonSubmit);
+        row.appendChild(buttonElement);
+
+        menuTable.appendChild(row);
     });
-  
+
     // Update total cost
     function updateTotalCost() {
-      const totalCost = orderData.reduce((total, item) => total + (item.quantity * item.price), 0);
-      document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
+        const totalCost = orderData.reduce((total, item) => total + (item.quantity * item.price), 0);
+        document.getElementById('totalCost').textContent = `$${totalCost.toFixed(2)}`;
     }
-  
+
     // Checkout button functionality
     document.getElementById('checkoutButton').addEventListener('click', function() {
-      if (orderData.length > 0) {
-        fetch('/submit-order', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(orderData),
-        })
-        .then(response => response.json())
-        .then(data => {
-          alert('Order submitted successfully!');
-          // Optionally, clear the order after submission
-          orderData = [];
-          orderTable.innerHTML = '';  // Clear order table
-          updateTotalCost();          // Reset total cost display
-        })
-        .catch(error => {
-          console.error('Error submitting order:', error);
-        });
-      } else {
-        alert('Please add items to your order before checking out.');
-      }
+        if (orderData.length > 0) {
+            fetch('/submit-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderData),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert('Order submitted successfully!');
+                    // Optionally, clear the order after submission
+                    orderData = [];
+                    orderTable.innerHTML = '';  // Clear order table
+                    updateTotalCost();          // Reset total cost display
+                })
+                .catch(error => {
+                    console.error('Error submitting order:', error);
+                });
+        } else {
+            alert('Please add items to your order before checking out.');
+        }
     });
-  
+
     // Reset button functionality
     document.getElementById('resetButton').addEventListener('click', function() {
-      orderData = [];
-      orderTable.innerHTML = '';  // Clear order table
-      updateTotalCost();          // Reset total cost display
+        orderData = [];
+        orderTable.innerHTML = '';  // Clear order table
+        updateTotalCost();          // Reset total cost display
     });
-  }
-  
+}
+
 
 
 // CRUD operation for fetching Restaurant data
@@ -295,6 +317,18 @@ async function fetchOrders() {
 // Loads our menu on site loadup
 // window.onload = fetchMenu;
 window.onload = function() {
+    let items = document.querySelectorAll('.main-menu-item');
+    items.forEach((item) => {
+        item.style.display = "none";
+    })
+    items = document.querySelectorAll('.appetizer-menu-item');
+    items.forEach((item) => {
+        item.style.display = "none";
+    })
+    items = document.querySelectorAll('.dessert-menu-item');
+    items.forEach((item) => {
+        item.style.display = "none";
+    })
     fetchTable("menu");
     //fetchRestaurant()
     //fetchInventory()
@@ -303,4 +337,3 @@ window.onload = function() {
 };
 
 // window.onload = function() {};
-
