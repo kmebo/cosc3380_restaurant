@@ -5,6 +5,7 @@ const inventoryButton = document.getElementById('inventory-button');
 const addButton = document.getElementById('add-button');
 const removeButton = document.getElementById('remove-button');
 const employeeRemoveButton = document.getElementById('removeEmployee-button')
+const employeeAddButton = document.getElementById('addEmployee-button');
 
 employeeButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
@@ -163,6 +164,7 @@ async function fetchInventory() {
     });
 }
 
+// Both functions for removing an employee
 employeeRemoveButton.addEventListener('click', () =>{
     const idValue = (document.getElementById('removeEmployeeId')).value;
     //console.log(idValue);
@@ -185,6 +187,43 @@ async function removeEmployee(employeeId){
             fetchEmployee();
         }
         alert('Employee removed successfully');
+    }catch(error){
+        console.error('Error: ', error);
+        alert('An error has occurred');
+    }
+}
+
+// Functions for adding an employee
+employeeAddButton.addEventListener('click', () =>{
+    const formData = {
+        ssn: document.getElementById('ssn').value,
+        position: document.getElementById('position').value,
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        birthDate: document.getElementById('birthDate').value,
+        hireDate: document.getElementById('hireDate').value,
+        storeId: document.getElementById('storeId').value
+    };
+    addEmployee(formData);
+});
+
+async function addEmployee(formData){
+    try{
+        const response = await fetch('http://localhost:3000/employee/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        if(!response.ok){
+            const errorData = await response.json();
+            console.error('Error:', errorData.message);
+            alert('Failed to add employee: ' + errorData.message);
+            return;
+        }else{
+            fetchEmployee();
+        }
+        alert('Employee added successfully');
     }catch(error){
         console.error('Error: ', error);
         alert('An error has occurred');

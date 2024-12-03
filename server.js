@@ -210,6 +210,26 @@ app.delete('/employee/:id', async (req, res) => {
     }
 });
 
+// Insert a new employee
+app.post('/employee/add', async (req, res) => {
+    const {ssn, position, firstName, lastName, email, birthDate, hireDate, storeId} = req.body;
+    const client = await pool.connect();
+
+    try{
+        await client.query('BEGIN');
+
+        await client.query('INSERT INTO employee (ssn, position, first_name, last_name, email, birth_date, hire_date, store_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [ssn, position, firstName, lastName, email, birthDate, hireDate, storeId]);
+
+        await client.query('COMMIT');
+        res.sendStatus(200);
+    } catch(error){
+        await client.query('ROLLBACK');
+        //console.error('Transaction error: ', error.message);
+        res.sendStatus(500);
+    }finally{
+        client.release();
+    }
+});
 
 app.get('/ingredientsAvailable', async (req, res) => {
 
