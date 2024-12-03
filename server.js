@@ -15,7 +15,7 @@ const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
     database: 'hw4_test',
-    password: "cameron18", // Default 1234
+    password: "1234", // Default 1234
     port: 5432,
 });
 
@@ -205,15 +205,6 @@ pool.connect((err, client, release) => {
     // Always release the client back to the pool
     release();
 });
-
-export function cartCheckout(cart) {
-
-    Object.entries(cart).forEach(([itemName, item]) => {
-        console.log(`Item: ${itemName}, Price: $${item.price}, Quantity: ${item.quantity}`);
-    });
-
-
-}
 
 // Testing server port connection
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
