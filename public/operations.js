@@ -4,25 +4,24 @@ const financesButton = document.getElementById('finances-button');
 const inventoryButton = document.getElementById('inventory-button');
 const addButton = document.getElementById('add-button');
 const removeButton = document.getElementById('remove-button');
+const editButton = document.getElementById('edit-button');
 const employeeRemoveButton = document.getElementById('removeEmployee-button')
 const employeeAddButton = document.getElementById('addEmployee-button');
+const employeeEditButton = document.getElementById('editEmployee-button');
 
 employeeButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
     for(let item of items){
         item.style.display = 'block';
     }
-    
     items = document.getElementsByClassName('department-container');
     for(let item of items){
         item.style.display = 'none';
     }
-
     items = document.getElementsByClassName('finances-container');
     for(let item of items){
         item.style.display = 'none';
     }
-
     items = document.getElementsByClassName('inventory-container');
     for(let item of items){
         item.style.display = 'none';
@@ -34,17 +33,14 @@ departmentButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'none';
     }
-    
     items = document.getElementsByClassName('department-container');
     for(let item of items){
         item.style.display = 'block';
     }
-
     items = document.getElementsByClassName('finances-container');
     for(let item of items){
         item.style.display = 'none';
     }
-
     items = document.getElementsByClassName('inventory-container');
     for(let item of items){
         item.style.display = 'none';
@@ -56,17 +52,14 @@ financesButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'none';
     }
-    
     items = document.getElementsByClassName('department-container');
     for(let item of items){
         item.style.display = 'none';
     }
-
     items = document.getElementsByClassName('finances-container');
     for(let item of items){
         item.style.display = 'block';
     }
-
     items = document.getElementsByClassName('inventory-container');
     for(let item of items){
         item.style.display = 'none';
@@ -78,17 +71,14 @@ inventoryButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'none';
     }
-    
     items = document.getElementsByClassName('department-container');
     for(let item of items){
         item.style.display = 'none';
     }
-
     items = document.getElementsByClassName('finances-container');
     for(let item of items){
         item.style.display = 'none';
     }
-
     items = document.getElementsByClassName('inventory-container');
     for(let item of items){
         item.style.display = 'block';
@@ -100,8 +90,11 @@ addButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'block';
     }
-
     items = document.getElementsByClassName('remove-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('edit-container');
     for(let item of items){
         item.style.display = 'none';
     }
@@ -112,10 +105,28 @@ removeButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'block';
     }
-
     items = document.getElementsByClassName('add-container');
     for(let item of items){
         item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('edit-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+});
+
+editButton.addEventListener('click', () => {
+    let items = document.getElementsByClassName('remove-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('add-container');
+    for(let item of items){
+        item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('edit-container');
+    for(let item of items){
+        item.style.display = 'block';
     }
 });
 
@@ -193,17 +204,17 @@ async function removeEmployee(employeeId){
     }
 }
 
-// Functions for adding an employee
+// Both Functions for adding an employee
 employeeAddButton.addEventListener('click', () =>{
     const formData = {
-        ssn: document.getElementById('ssn').value,
-        position: document.getElementById('position').value,
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        email: document.getElementById('email').value,
-        birthDate: document.getElementById('birthDate').value,
-        hireDate: document.getElementById('hireDate').value,
-        storeId: document.getElementById('storeId').value
+        ssn: document.getElementById('addSsn').value,
+        position: document.getElementById('addPosition').value,
+        firstName: document.getElementById('addFirstName').value,
+        lastName: document.getElementById('addLastName').value,
+        email: document.getElementById('addEmail').value,
+        birthDate: document.getElementById('addBirthDate').value,
+        hireDate: document.getElementById('addHireDate').value,
+        storeId: document.getElementById('addStoreId').value
     };
     addEmployee(formData);
 });
@@ -224,6 +235,39 @@ async function addEmployee(formData){
             fetchEmployee();
         }
         alert('Employee added successfully');
+    }catch(error){
+        console.error('Error: ', error);
+        alert('An error has occurred');
+    }
+}
+
+// Both functions for editing an employee
+employeeEditButton.addEventListener('click', () =>{
+    const idValue = (document.getElementById('editEmployeeId')).value;
+    const formData = {
+        position: document.getElementById('editPosition').value,
+        email: document.getElementById('editEmail').value,
+        storeId: document.getElementById('editStoreId').value
+    };
+    editEmployee(idValue, formData);
+});
+
+async function editEmployee(employeeId, formData){
+    try{
+        const response = await fetch(`http://localhost:3000/employee/${employeeId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        if(!response.ok){
+            const errorData = await response.json();
+            console.error('Error:', errorData.message);
+            alert('Failed to edit employee: ' + errorData.message);
+            return;
+        }else{
+            fetchEmployee();
+        }
+        alert('Employee edited successfully');
     }catch(error){
         console.error('Error: ', error);
         alert('An error has occurred');

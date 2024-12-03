@@ -231,6 +231,50 @@ app.post('/employee/add', async (req, res) => {
     }
 });
 
+// Edit employee data
+app.put('/employee/:id', async (req, res) => {
+    const {position, email, storeId} = req.body;
+    const {id: employeeId} = req.params;
+    // This method works, but empty values are applied to the query, setting the table values to blank
+    /*try {
+        await pool.query('UPDATE employee SET position = $1, email = $2, store_id = $3 WHERE employee_id = $4', [position, email, storeId, employeeId]);
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }*/
+   // This method ensures that if a value is left blank it will not be applied to the query
+    try {
+        const updates = [];
+        const values = [];
+        let query = 'UPDATE employee SET ';
+    
+        if (position) {
+                updates.push('position = $' + (updates.length + 1));
+                values.push(position);
+        }
+        if (email) {
+            updates.push('email = $' + (updates.length + 1));
+            values.push(email);
+        }
+         if (storeId) {
+            updates.push('store_id = $' + (updates.length + 1));
+            values.push(storeId);
+        }
+        if (updates.length === 0) {
+           return res.status(400).json({ message: 'No valid fields to update' });
+        }
+        query += updates.join(', ') + ' WHERE employee_id = $' + (updates.length + 1);
+        values.push(employeeId);
+    
+        await pool.query(query, values);
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500);
+    }
+});
+
 app.get('/ingredientsAvailable', async (req, res) => {
 
     const {ingredient, amount} = req.body;

@@ -73,11 +73,19 @@
         font-size: medium;
       }
 
+      #editEmployeeForm {
+        font-size: medium;
+      }
+
       #addContainer {
         display: none;
       }
 
       #removeContainer {
+        display: none;
+      }
+
+      #editContainer {
         display: none;
       }
 
@@ -101,6 +109,7 @@
 
     <!-- Restaurant Inside Operations Info Section -->
     <div id="operations-info">
+      <!-- Employee list table  -->
       <div class="table-container, employee-container" id="employee-Table">
         <h2>Employee</h2>
         <table>
@@ -119,21 +128,23 @@
           </thead>
           <tbody id="employeeTable"></tbody>
         </table>
+        <!-- Submenu for employee CRUD operations -->
         <div class="submenu">
           <button id="add-button">Add</button>
           <button id="remove-button">Remove</button>
           <button id="edit-button">Edit</button>
         </div>
+        <!-- Employee addition container -->
         <div class="crud-container, add-container" id="addContainer">
           <h3>Add New Employee</h3>
           <form id="addEmployeeForm">
             <label for="ssn">SSN:</label>
-            <input type="text" id="ssn" name="ssn" required /><br /><br />
+            <input type="text" id="addSsn" name="ssn" required /><br /><br />
 
             <label for="position">Position:</label>
             <input
               type="text"
-              id="position"
+              id="addPosition"
               name="position"
               required
             /><br /><br />
@@ -141,7 +152,7 @@
             <label for="firstName">First Name:</label>
             <input
               type="text"
-              id="firstName"
+              id="addFirstName"
               name="firstName"
               required
             /><br /><br />
@@ -149,18 +160,23 @@
             <label for="lastName">Last Name:</label>
             <input
               type="text"
-              id="lastName"
+              id="addLastName"
               name="lastName"
               required
             /><br /><br />
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required /><br /><br />
+            <input
+              type="email"
+              id="addEmail"
+              name="email"
+              required
+            /><br /><br />
 
             <label for="birthDate">Birth Date:</label>
             <input
               type="date"
-              id="birthDate"
+              id="addBirthDate"
               name="birthDate"
               required
             /><br /><br />
@@ -168,7 +184,7 @@
             <label for="hireDate">Hire Date:</label>
             <input
               type="date"
-              id="hireDate"
+              id="addHireDate"
               name="hireDate"
               required
             /><br /><br />
@@ -176,7 +192,7 @@
             <label for="storeId">Store ID:</label>
             <input
               type="number"
-              id="storeId"
+              id="addStoreId"
               name="storeId"
               required
               min="1"
@@ -186,6 +202,7 @@
             <button type="reset" id="reset-button">Clear</button>
           </form>
         </div>
+        <!-- Employee removal container -->
         <div class="crud-container, remove-container" id="removeContainer">
           <h3>Remove Employee By ID#</h3>
           <form id="removeEmployeeForm">
@@ -202,6 +219,50 @@
               Remove Employee
             </button>
             <button type="reset" id="reset-button">Clear</button>
+          </form>
+        </div>
+        <!-- Employee edit container -->
+        <div class="crud-container, edit-container" id="editContainer">
+          <h3>Edit Employee Info</h3>
+          <form id="editEmployeeForm">
+            <label for="employeeId">Employee ID:</label>
+            <input
+              type="number"
+              id="editEmployeeId"
+              name="employeeId"
+              required
+              min="0"
+            /><br /><br />
+
+            <label for="position">Position:</label>
+            <input
+              type="text"
+              id="editPosition"
+              name="position"
+              required
+            /><br /><br />
+
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="editEmail"
+              name="email"
+              required
+            /><br /><br />
+
+            <label for="storeId">Store ID:</label>
+            <input
+              type="number"
+              id="editStoreId"
+              name="storeId"
+              required
+              min="1"
+            /><br /><br />
+
+            <button type="button" id="editEmployee-button">
+              Edit Employee
+            </button>
+            <button type="reset" id="editReset-button">Clear</button>
           </form>
         </div>
       </div>
