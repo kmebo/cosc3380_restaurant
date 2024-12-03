@@ -92,7 +92,6 @@
     <!-- Navigation Bar -->
     <div class="navbar">
       <a href="#menu">Menu</a>
-      <a href="order.html">Order Summary</a>
       <a href="operations.html">Operations</a>
     </div>
 
@@ -102,23 +101,26 @@
       <button id="appetizer-button">Appetizers</button>
       <button id="main-course-button">Main Course</button>
       <button id="dessert-button">Desserts</button>
+      <button id="cart-button">
+        <img src="images/cart.jpg" alt="Add to Cart Image" style="width: 30px; height: 30px;">
+      </button>
     </div>
+
 
     <div class="main-course-display">
       <div class="menu-container">
         <div class="main-menu-item">
           <h3>Pizza</h3>
-          <img src="../node_modules/pizza.jpg" alt="Pizza" class="item-image" />
+          <img src="images/pizza.jpg" alt="Pizza" class="item-image" />
           <p class="item-description">
             A delicious pizza topped with cheese, pepperoni, and vegetables. $13
           </p>
-          <label for="pizza-quantity">Quantity:</label><input type="number" id="pizza-quantity" min="1" value="1" class="item-quantity" />
           <button id="pizza-button">Add to Cart</button>
         </div>
         <div class="main-menu-item">
           <h3>Lasagna</h3>
           <img
-            src="../node_modules/lasagna.jpg"
+            src="images/lasagna.jpg"
             alt="Lasagna"
             class="item-image"
           />
@@ -131,7 +133,7 @@
         <div class="main-menu-item">
           <h3>Chicken Alfredo</h3>
           <img
-            src="../node_modules/chicken-alfredo.jpg"
+            src="images/chicken-alfredo.jpg"
             alt="Chicken Alfredo"
             class="item-image"
           />
@@ -143,7 +145,7 @@
         <div class="main-menu-item">
           <h3>Sandwich</h3>
           <img
-            src="../node_modules/sandwhich.jpeg"
+            src="images/sandwhich.jpeg"
             alt="Italian Sandwich"
             class="item-image"
           />
@@ -155,7 +157,7 @@
         <div class="main-menu-item">
           <h3>Spaghetti</h3>
           <img
-            src="../node_modules/Spaghetti.jpg"
+            src="images/Spaghetti.jpg"
             alt="Spaghetti"
             class="item-image"
           />
@@ -172,18 +174,17 @@
         <div class="appetizer-menu-item">
           <h3>Breadsticks</h3>
           <img
-            src="../node_modules/breadsticks.jpeg"
+            src="images/breadsticks.jpeg"
             alt="Breadsticks"
             class="item-image"
           />
           <p class="item-description">Soft and buttery bread sticks. $4</p>
-          <label for="breadsticks-quantity">Quantity:</label><input type="number" id="breadsticks-quantity" min="1" value="1" class="item-quantity" />
           <button id="breadsticks-button">Add to Cart</button>
         </div>
         <div class="appetizer-menu-item">
           <h3>Meatballs</h3>
           <img
-            src="../node_modules/meatballs.jpeg"
+            src="images/meatballs.jpeg"
             alt="Meatballs"
             class="item-image"
           />
@@ -195,7 +196,7 @@
         <div class="appetizer-menu-item">
           <h3>Prosciutto</h3>
           <img
-            src="../node_modules/proschuitto.jpeg"
+            src="images/proschuitto.jpeg"
             alt="Prosciutto"
             class="item-image"
           />
@@ -205,7 +206,7 @@
         <div class="appetizer-menu-item">
           <h3>Mozzarella Balls</h3>
           <img
-            src="../node_modules/motzerella%20balls.jpeg"
+            src="images/motzerella%20balls.jpeg"
             alt="Mozzarella Balls"
             class="item-image"
           />
@@ -222,7 +223,7 @@
         <div class="dessert-menu-item">
           <h3>Cheesecake</h3>
           <img
-            src="../node_modules/cheesecake.jpg"
+            src="images/cheesecake.jpg"
             alt="Cheesecake"
             class="item-image"
           />
@@ -232,7 +233,7 @@
         <div class="dessert-menu-item">
           <h3>Cannoli</h3>
           <img
-            src="../node_modules/cannoli.jpeg"
+            src="images/cannoli.jpeg"
             alt="Cannoli"
             class="item-image"
           />
@@ -244,7 +245,7 @@
         <div class="dessert-menu-item">
           <h3>Chocolate Macarons</h3>
           <img
-            src="../node_modules/macarons.jpg"
+            src="images/macarons.jpg"
             alt="Macarons"
             class="item-image"
           />
@@ -263,12 +264,24 @@
       ></div>
     </div>
 
+    <div id="popup" class="popup hidden"></div>
+
     <!-- Tables Definition DON'T FORGET TO DO THIS MY GOD-->
     <table id="menuTable">
       ...
     </table>
 
+    <div id="cartContainer">
+      <!-- Cart items will be displayed here -->
+    </div>
+
+    <div id="checkout-submenu">
+      <span id="totalAmount">Total: $0.00</span>
+      <button id="checkout-button">Checkout</button>
+    </div>
+
     <!-- Scripts -->
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="order.js"></script>
   </body>
 </html>

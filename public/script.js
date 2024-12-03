@@ -13,55 +13,6 @@ async function fetchTable(table) {
     }
 }
 
-const appetizerButton = document.getElementById("appetizer-button");
-const mainCourseButton = document.getElementById("main-course-button");
-const dessertButton = document.getElementById("dessert-button");
-
-appetizerButton.addEventListener("click", () => {
-    let items = document.querySelectorAll('.main-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-    items = document.querySelectorAll('.appetizer-menu-item');
-    items.forEach((item) => {
-        item.style.display = "block";
-    })
-    items = document.querySelectorAll('.dessert-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-});
-
-mainCourseButton.addEventListener("click", () => {
-    //displayMenuItems(result,"Main Course")
-    let items = document.querySelectorAll('.main-menu-item');
-    items.forEach((item) => {
-        item.style.display = "block";
-    })
-    items = document.querySelectorAll('.appetizer-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-    items = document.querySelectorAll('.dessert-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-});
-
-dessertButton.addEventListener("click", () => {
-    let items = document.querySelectorAll('.main-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-    items = document.querySelectorAll('.dessert-menu-item');
-    items.forEach((item) => {
-        item.style.display = "block";
-    })
-    items = document.querySelectorAll('.appetizer-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-});
 
 function displayMenuItems(result,type) {
 
@@ -314,21 +265,6 @@ async function fetchOrders() {
 //     //console.log('test');
 // });
 
-
-document.getElementById("pizza-button").addEventListener("click", function() {
-    // Get the quantity entered by the customer
-    var quantity = document.getElementById("pizza-quantity").value;
-  
-    // Ensure the quantity is a valid number
-    if (quantity >= 1 && quantity <= 100) {
-      console.log("Adding " + quantity + " pizzas to the cart.");
-      Add_preorder("pizza", quantity)
-
-    } else {
-      alert("Please enter a valid quantity between 1 to 100.");
-    }
-});
-
   document.getElementById("breadsticks-button").addEventListener("click", function() {
     // Get the quantity entered by the customer
     var quantity = document.getElementById("breadsticks-quantity").value;
@@ -351,18 +287,6 @@ document.getElementById("pizza-button").addEventListener("click", function() {
   }
 
 window.onload = function() {
-    let items = document.querySelectorAll('.main-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-    items = document.querySelectorAll('.appetizer-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
-    items = document.querySelectorAll('.dessert-menu-item');
-    items.forEach((item) => {
-        item.style.display = "none";
-    })
     fetchTable("menu");
     //fetchRestaurant()
     //fetchInventory()
