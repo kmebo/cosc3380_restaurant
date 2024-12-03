@@ -8,6 +8,7 @@ const editButton = document.getElementById('edit-button');
 const employeeRemoveButton = document.getElementById('removeEmployee-button')
 const employeeAddButton = document.getElementById('addEmployee-button');
 const employeeEditButton = document.getElementById('editEmployee-button');
+const orderInventoryButton = document.getElementById('orderInventory-button');
 
 employeeButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
@@ -171,7 +172,13 @@ async function fetchInventory() {
                                 inventory.last_restocked
                             ).toLocaleDateString()}</td>
                         </tr>`;
-      table.innerHTML += row;
+        table.innerHTML += row;
+    });
+    const menu = document.getElementById('inventoryMenu');
+    menu.innerHTML = '';
+    inventories.forEach((items) => {
+        const item = `<option value = '${items.item_name}'> ${items.item_name} </option>`;
+        menu.innerHTML += item;
     });
 }
 
@@ -268,6 +275,35 @@ async function editEmployee(employeeId, formData){
             fetchEmployee();
         }
         alert('Employee edited successfully');
+    }catch(error){
+        console.error('Error: ', error);
+        alert('An error has occurred');
+    }
+}
+
+// Functions for ordering more inventory
+orderInventoryButton.addEventListener('click', () => {
+    const orderValue = parseInt((document.getElementById('orderInventory')).value, 10);
+    const orderName = (document.getElementById('inventoryMenu')).value;
+    orderInventory(orderValue, orderName);
+});
+
+async function orderInventory(item_amount, item_name){
+    try{
+        const response = await fetch(`http://localhost:3000/inventory/${item_name}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({item_amount})
+        });
+        if(!response.ok){
+            const errorData = await response.json();
+            console.error('Error:', errorData.message);
+            alert('Failed to order inventory: ' + errorData.message);
+            return;
+        }else{
+            fetchInventory();
+        }
+        alert('Inventory ordered successfully');
     }catch(error){
         console.error('Error: ', error);
         alert('An error has occurred');

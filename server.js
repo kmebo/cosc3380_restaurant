@@ -216,13 +216,15 @@ app.post('/employee/add', async (req, res) => {
     const client = await pool.connect();
 
     try{
+        // Begin the transaction
         await client.query('BEGIN');
-
+        // Insert new values into employee relation
         await client.query('INSERT INTO employee (ssn, position, first_name, last_name, email, birth_date, hire_date, store_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)', [ssn, position, firstName, lastName, email, birthDate, hireDate, storeId]);
-
+        // Commit the changes if successfull
         await client.query('COMMIT');
         res.sendStatus(200);
     } catch(error){
+        // Rollback if an error occurs
         await client.query('ROLLBACK');
         //console.error('Transaction error: ', error.message);
         res.sendStatus(500);
@@ -297,6 +299,20 @@ app.get('/ingredientsAvailable', async (req, res) => {
         res.status(500);
     }
 
+});
+
+// Orders more inventory
+app.put('/inventory/:name', async (req, res) => {
+    const {name: item_name} = req.params;
+    const {item_amount} = req.body;
+
+    try {
+        await pool.query('UPDATE inventory SET item_amount = item_amount + $1, last_restocked = CURRENT_DATE WHERE item_name = $2', [item_amount, item_name]);
+        res.sendStatus(200);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
 });
 
 // Testing database connection is successful

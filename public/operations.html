@@ -89,6 +89,10 @@
         display: none;
       }
 
+      #orderInventory {
+        width: 5rem;
+      }
+
       h3 {
         font-size: medium;
       }
@@ -314,6 +318,19 @@
             </thead>
             <tbody id="InventoryTable"></tbody>
           </table>
+        </div>
+        <!-- Submenu for Inventory CRUD operations -->
+        <div class="submenu">
+          <button id="orderInventory-button">Order</button>
+          <select id="inventoryMenu"></select>
+          <form id="orderInventoryForm">
+            <input
+              type="number"
+              name="orderInventory"
+              id="orderInventory"
+              min="0"
+            />
+          </form>
         </div>
       </div>
     </div>

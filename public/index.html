@@ -20,6 +20,7 @@
         position: sticky;
         top: 0;
         z-index: 1000;
+        font-size: medium;
       }
 
       .navbar a {
@@ -102,10 +103,13 @@
       <button id="main-course-button">Main Course</button>
       <button id="dessert-button">Desserts</button>
       <button id="cart-button">
-        <img src="images/cart.jpg" alt="Add to Cart Image" style="width: 30px; height: 30px;">
+        <img
+          src="images/cart.jpg"
+          alt="Add to Cart Image"
+          style="width: 30px; height: 30px"
+        />
       </button>
     </div>
-
 
     <div class="main-course-display">
       <div class="menu-container">
@@ -119,11 +123,7 @@
         </div>
         <div class="main-menu-item">
           <h3>Lasagna</h3>
-          <img
-            src="images/lasagna.jpg"
-            alt="Lasagna"
-            class="item-image"
-          />
+          <img src="images/lasagna.jpg" alt="Lasagna" class="item-image" />
           <p class="item-description">
             Yummy cheesy lasagna with four layers of cheese and rich ground
             beef. $14
@@ -156,11 +156,7 @@
         </div>
         <div class="main-menu-item">
           <h3>Spaghetti</h3>
-          <img
-            src="images/Spaghetti.jpg"
-            alt="Spaghetti"
-            class="item-image"
-          />
+          <img src="images/Spaghetti.jpg" alt="Spaghetti" class="item-image" />
           <p class="item-description">
             Squigly spaghetti with fresh red sauce. $12
           </p>
@@ -183,11 +179,7 @@
         </div>
         <div class="appetizer-menu-item">
           <h3>Meatballs</h3>
-          <img
-            src="images/meatballs.jpeg"
-            alt="Meatballs"
-            class="item-image"
-          />
+          <img src="images/meatballs.jpeg" alt="Meatballs" class="item-image" />
           <p class="item-description">
             Soft and seasoned meatballs with red sauce. $5
           </p>
@@ -232,11 +224,7 @@
         </div>
         <div class="dessert-menu-item">
           <h3>Cannoli</h3>
-          <img
-            src="images/cannoli.jpeg"
-            alt="Cannoli"
-            class="item-image"
-          />
+          <img src="images/cannoli.jpeg" alt="Cannoli" class="item-image" />
           <p class="item-description">
             A few chocolate cannoli's filled with cream. $6
           </p>
@@ -244,11 +232,7 @@
         </div>
         <div class="dessert-menu-item">
           <h3>Chocolate Macarons</h3>
-          <img
-            src="images/macarons.jpg"
-            alt="Macarons"
-            class="item-image"
-          />
+          <img src="images/macarons.jpg" alt="Macarons" class="item-image" />
           <p class="item-description">Three savory chocolate Macarons. $7</p>
           <button id="macaron-button">Add to Cart</button>
         </div>
@@ -257,9 +241,9 @@
 
     <div class="dropdown store-selector">
       <select id="store-dropdown">
-          <option value="" disabled selected>Select a Store</option>
+        <option value="" disabled selected>Select a Store</option>
       </select>
-  </div>
+    </div>
 
     <div id="popup" class="popup hidden"></div>
 
