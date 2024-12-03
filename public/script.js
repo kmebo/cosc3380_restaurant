@@ -286,8 +286,30 @@ async function fetchOrders() {
       });
   }
 
+async function populateDropdown() {
+    const response = await fetch("http://localhost:3000/stores");
+    const stores = await response.json();
+
+    const dropdown = document.getElementById("store-dropdown");
+    dropdown.innerHTML = '<option value="" disabled selected>Select a Store</option>';
+
+    stores.forEach(store => {
+        const option = document.createElement("option");
+        option.value = store.store_id;
+        option.textContent = store.location;
+        dropdown.appendChild(option);
+    });
+}
+
+window.populateDropdown = populateDropdown;
+
+document.addEventListener("DOMContentLoaded", () => {
+    populateDropdown();
+});
+
 window.onload = function() {
     fetchTable("menu");
+    populateDropdown();
     //fetchRestaurant()
     //fetchInventory()
     //fetchCustomer()
