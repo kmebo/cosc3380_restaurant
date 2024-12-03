@@ -286,6 +286,8 @@ async function fetchOrders() {
       });
   }
 
+let selectedStoreId;
+
 async function populateDropdown() {
     const response = await fetch("http://localhost:3000/stores");
     const stores = await response.json();
@@ -299,6 +301,10 @@ async function populateDropdown() {
         option.textContent = store.location;
         dropdown.appendChild(option);
     });
+
+    dropdown.addEventListener('change', (event) => {
+        selectedStoreId = event.target.value;
+    });
 }
 
 window.populateDropdown = populateDropdown;
@@ -306,6 +312,7 @@ window.populateDropdown = populateDropdown;
 document.addEventListener("DOMContentLoaded", () => {
     populateDropdown();
 });
+
 
 window.onload = function() {
     fetchTable("menu");
