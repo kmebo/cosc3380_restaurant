@@ -4,6 +4,7 @@ const financesButton = document.getElementById('finances-button');
 const inventoryButton = document.getElementById('inventory-button');
 const addButton = document.getElementById('add-button');
 const removeButton = document.getElementById('remove-button');
+const employeeRemoveButton = document.getElementById('removeEmployee-button')
 
 employeeButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
@@ -120,7 +121,7 @@ removeButton.addEventListener('click', () => {
 async function fetchEmployee() {
     const response = await fetch("http://localhost:3000/employee");
     const employees = await response.json();
-    console.log(employees);
+    //console.log(employees);
     const table = document.getElementById("employeeTable");
     table.innerHTML = "";
     employees.forEach((employee_) => {
@@ -145,7 +146,7 @@ async function fetchEmployee() {
 async function fetchInventory() {
     const response = await fetch("http://localhost:3000/inventory");
     const inventories = await response.json();
-    console.log(inventories);
+    //console.log(inventories);
     const table = document.getElementById("InventoryTable");
     table.innerHTML = "";
     inventories.forEach((inventory) => {
@@ -160,6 +161,32 @@ async function fetchInventory() {
                         </tr>`;
       table.innerHTML += row;
     });
+}
+
+employeeRemoveButton.addEventListener('click', () =>{
+    const idValue = (document.getElementById('removeEmployeeId')).value;
+    //console.log(idValue);
+    removeEmployee(idValue);
+});
+
+async function removeEmployee(employeeId){
+    try{
+        const response = await fetch(`http://localhost:3000/employee/${employeeId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+            //body: JSON.stringify({employeeId})
+        });
+        if(!response.ok){
+            const errorData = await response.json();
+            console.error('Error:', errorData.message);
+            alert('Failed to remove employee: ' + errorData.message);
+            return;
+        }
+        alert('Employee removed successfully');
+    }catch(error){
+        console.error('Error: ', error);
+        alert('An error has occurred');
+    }
 }
 
   window.onload = function() {

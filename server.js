@@ -195,6 +195,46 @@ app.post('/preorder', async (req, res) => {
     }
 });
 
+// Delete a employee by ID
+app.delete('/employee/:id', async (req, res) => {
+    const {id} = req.params;
+    try{
+        const result = await pool.query('DELETE FROM employee WHERE employee_id = $1', [id]);
+        if(result.rowCount === 0){
+            return res.sendStatus(404);
+        }
+        res.sendStatus(200);
+    }catch(err){
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
+
+
+app.get('/ingredientsAvailable', async (req, res) => {
+
+    const {ingredient, amount} = req.body;
+
+    try {
+        // Begin transaction
+        await pool.query('BEGIN');
+
+        // Insert new order
+        const queryResult = await pool.query('SELECT $1 FROM inventory WHERE item_amount >= $2', [ingredient, amount]);
+
+        // Commit transaction
+        await pool.query('COMMIT');
+        res.status(200);
+        res.json(queryResult.rows);
+    } catch (err) {
+        // Rollback in case of error
+        await pool.query('ROLLBACK');
+        console.error(err.message);
+        res.status(500);
+    }
+
+});
+
 // Testing database connection is successful
 pool.connect((err, client, release) => {
     if (err) {
