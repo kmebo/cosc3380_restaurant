@@ -188,7 +188,12 @@ VALUES ('Cheese', 99, 1, '2024-11-25'),
     ('Cheesecake', 99, 1, '2024-11-25'),
     ('Gelato', 99, 1, '2024-11-25'),
     ('Bread', 99, 1, '2024-11-25'),
-    ('Butter', 99, 1, '2024-11-25');
+    ('Butter', 99, 1, '2024-11-25'),
+    ('Beef', 99, 1, '2024-11-25'),
+    ('Chicken', 99, 1, '2024-11-25'),
+    ('Prosciutto', 99, 1, '2024-11-25'),
+    ('Cannoli', 99, 1, '2024-11-25'),
+    ('Macaron', 99, 1, '2024-11-25');
 INSERT INTO employee (
         ssn,
         position,
@@ -223,3 +228,4 @@ SELECT *
 FROM menu;
 SELECT *
 FROM inventory;
+

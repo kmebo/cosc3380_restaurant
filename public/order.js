@@ -1,6 +1,351 @@
 
 let cartHash = {}
 
+async function checkoutItems() {
+
+    const response = await fetch("http://localhost:3000/inventory")
+    const data = await response.json()
+    console.log(data)
+
+    for (const cartItem in cartHash) {
+        let itemName = cartItem;
+        for (itemName in cartHash) {
+            const item = cartHash[itemName];
+            let ingredientsNeeded = []
+            let amountNeeded = item.quantity
+            switch (itemName) {
+                case "Pizza":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Sauce");
+                    ingredientsNeeded.push("Dough");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                           method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Lasagna":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Sauce");
+                    ingredientsNeeded.push("Beef");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Alfredo":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Chicken");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Sandwich":
+                    ingredientsNeeded.push("Tomato");
+                    ingredientsNeeded.push("Chicken");
+                    ingredientsNeeded.push("Bread");
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Lettuce");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Spaghetti":
+                    ingredientsNeeded.push("Sauce");
+                    ingredientsNeeded.push("Pasta");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Breadsticks":
+                    ingredientsNeeded.push("Bread");
+                    ingredientsNeeded.push("Butter");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Prosciutto":
+                    ingredientsNeeded.push("Prosciutto");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Mozzarella":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Sauce");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Cheesecake":
+                    ingredientsNeeded.push("Cheesecake");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+                case "Cannoli":
+                    ingredientsNeeded.push("Cannoli");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/ingredientsAvailable", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                        const jsonResponse = await response.json();
+                        if (jsonResponse < 1) {
+                            errorOrderingPopup(itemName);
+                            return
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+    placeOrder()
+}
+
+async function placeOrder() {
+
+    for (const cartItem in cartHash) {
+        let itemName = cartItem;
+        for (itemName in cartHash) {
+            const item = cartHash[itemName];
+            let ingredientsNeeded = []
+            let amountNeeded = item.quantity
+            switch (itemName) {
+                case "Pizza":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Sauce");
+                    ingredientsNeeded.push("Dough");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Lasagna":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Sauce");
+                    ingredientsNeeded.push("Beef");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Alfredo":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Chicken");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Sandwich":
+                    ingredientsNeeded.push("Tomato");
+                    ingredientsNeeded.push("Chicken");
+                    ingredientsNeeded.push("Bread");
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Lettuce");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Spaghetti":
+                    ingredientsNeeded.push("Sauce");
+                    ingredientsNeeded.push("Pasta");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Breadsticks":
+                    ingredientsNeeded.push("Bread");
+                    ingredientsNeeded.push("Butter");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Prosciutto":
+                    ingredientsNeeded.push("Prosciutto");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Mozzarella":
+                    ingredientsNeeded.push("Cheese");
+                    ingredientsNeeded.push("Sauce");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Cheesecake":
+                    ingredientsNeeded.push("Cheesecake");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+                case "Cannoli":
+                    ingredientsNeeded.push("Cannoli");
+                    for (const index in ingredientsNeeded) {
+                        const ingredientName = ingredientsNeeded[index]
+                        const response = await fetch("http://localhost:3000/removeIngredient", {
+                            method: 'POST',
+                            headers: {'Content-Type': "application/json"},
+                            body: JSON.stringify({ingredient: ingredientName, amount: amountNeeded})
+                        });
+                    }
+                    break;
+            }
+        }
+    }
+
+}
+
+function errorOrderingPopup(orderItem) {
+
+    const popup = document.createElement('div');
+
+    popup.className = 'popup visible'; // Add initial classes
+    popup.textContent = `ERROR ordering ${orderItem}`;
+
+    // Append it to the body
+    document.body.appendChild(popup);
+
+    // Hide the popup after 3 seconds
+    setTimeout(() => {
+        popup.classList.remove('visible');
+        popup.classList.add('hidden');
+    }, 3000);
+
+}
 
 function hideAllMenuItems() {
     let items = document.querySelectorAll('.main-menu-item');
@@ -308,9 +653,10 @@ let checkoutButton = null;
 if (document.getElementById('checkout-button')) {
     cartButton = document.getElementById('checkout-button');
     cartButton.addEventListener('click', () => {
-
+        checkoutItems();
     })
 }
+
 
 
 
