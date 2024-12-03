@@ -181,6 +181,8 @@ async function removeEmployee(employeeId){
             console.error('Error:', errorData.message);
             alert('Failed to remove employee: ' + errorData.message);
             return;
+        }else{
+            fetchEmployee();
         }
         alert('Employee removed successfully');
     }catch(error){
@@ -189,7 +191,7 @@ async function removeEmployee(employeeId){
     }
 }
 
-  window.onload = function() {
+window.onload = function() {
     let items = document.getElementsByClassName('employee-container');
     for(let item of items){
         item.style.display = 'none';
