@@ -109,6 +109,7 @@
       <button id="department-button">Departments</button>
       <button id="finances-button">Finances</button>
       <button id="inventory-button">Inventory</button>
+      <button id="restaurant-button">Restaurants</button>
     </div>
 
     <!-- Restaurant Inside Operations Info Section -->
@@ -333,6 +334,32 @@
           </form>
         </div>
       </div>
+    </div>
+    
+    <div id="add-restaurant-container" style="display: none;">
+      <h2>Restaurants</h2>
+      <form id="add-restaurant-form">
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location" required><br><br>
+  
+          <label for="open-date">Open Date:</label>
+          <input type="date" id="open-date" name="open-date" required><br><br>
+  
+          <label for="sales">Sales:</label>
+          <input type="number" id="sales" name="sales" required><br><br>
+  
+          <label for="total-customers">Total Customers:</label>
+          <input type="number" id="total-customers" name="total-customers" required><br><br>
+  
+          <label for="owner">Owner:</label>
+          <input type="text" id="owner" name="owner" required><br><br>
+  
+          <label for="manager">Manager:</label>
+          <input type="text" id="manager" name="manager" required><br><br>
+  
+          <button type="submit">Add Restaurant</button>
+      </form>
+      <p id="add-restaurant-message"></p>
     </div>
 
     <script src="operations.js"></script>
