@@ -138,9 +138,12 @@ app.put('/preorder/:obj_id', async (req, res) => {
     const { obj_id } = req.params;
     const { quantity } = req.body;
     try {
+        await client.query('BEGIN');
         await pool.query('UPDATE preorder SET quantity = $1 WHERE obj_id = $2;', [quantity, obj_id]);
+        await client.query('COMMIT');
         res.sendStatus(200);
     } catch (err) {
+        await client.query('ROLLBACK');
         console.error(err.message);
         res.sendStatus(500);
     }
@@ -178,6 +181,7 @@ app.post('/preorder', async (req, res) => {
     }
 
     try {
+        await client.query('BEGIN');
         // Insert the pizza into the database, obj_id will be generated automatically
         const result = await pool.query(
             'INSERT INTO preorder (name, quantity) VALUES ($1, $2) RETURNING obj_id', 
@@ -186,10 +190,11 @@ app.post('/preorder', async (req, res) => {
 
         // Get the generated obj_id
         const obj_id = result.rows[0].obj_id;
-
+        await client.query('COMMIT');
         // Send a response with the newly created obj_id
         res.status(201).json({ obj_id, name, quantity });
     } catch (err) {
+        await client.query('ROLLBACK');
         console.error(err.message);
         res.sendStatus(500); // Internal server error
     }
@@ -199,12 +204,15 @@ app.post('/preorder', async (req, res) => {
 app.delete('/employee/:id', async (req, res) => {
     const {id} = req.params;
     try{
+        await client.query('BEGIN');
         const result = await pool.query('DELETE FROM employee WHERE employee_id = $1', [id]);
         if(result.rowCount === 0){
             return res.sendStatus(404);
         }
+        await client.query('COMMIT');
         res.sendStatus(200);
     }catch(err){
+        await client.query('ROLLBACK');
         console.error(err.message);
         res.sendStatus(500);
     }
@@ -247,6 +255,7 @@ app.put('/employee/:id', async (req, res) => {
     }*/
    // This method ensures that if a value is left blank it will not be applied to the query
     try {
+        await client.query('BEGIN');
         const updates = [];
         const values = [];
         let query = 'UPDATE employee SET ';
@@ -270,8 +279,10 @@ app.put('/employee/:id', async (req, res) => {
         values.push(employeeId);
     
         await pool.query(query, values);
+        await client.query('COMMIT');
         res.sendStatus(200);
     } catch (err) {
+        await client.query('ROLLBACK');
         console.error(err.message);
         res.status(500);
     }

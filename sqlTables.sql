@@ -9,7 +9,6 @@ DROP TABLE IF EXISTS inventory;
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS restaurant;
 DROP TABLE IF EXISTS preorder;
-
 CREATE TABLE menu(
     item_id SERIAL PRIMARY KEY,
     item_name VARCHAR(30),
@@ -105,12 +104,11 @@ CREATE TABLE customer_loyalty(
     join_date DATE,
     points INT
 );
-
-CREATE TABLE preorder( 
-obj_id SERIAL PRIMARY KEY, 
-name VARCHAR(255), 
-quantity INT );
-
+CREATE TABLE preorder(
+    obj_id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    quantity INT
+);
 INSERT INTO restaurant(
         store_id,
         location,
@@ -216,16 +214,111 @@ VALUES (
     ),
     (
         '987654321',
-        'Manager',
+        'Owner',
         'Cameron',
         'Emrie',
         'camerone@example.com',
         '1985-09-22',
         '2020-04-15',
         2
+    ),
+    (
+        123456789,
+        'Manager',
+        'Alice',
+        'Smith',
+        'alice.smith@example.com',
+        '1985-04-12',
+        '2010-06-15',
+        1
+    ),
+    (
+        987654321,
+        'Cashier',
+        'Bob',
+        'Jones',
+        'bob.jones@example.com',
+        '1990-07-21',
+        '2015-03-20',
+        2
+    ),
+    (
+        456789123,
+        'Cook',
+        'Carol',
+        'Brown',
+        'carol.brown@example.com',
+        '1982-11-05',
+        '2012-10-08',
+        1
+    ),
+    (
+        321654987,
+        'Cook',
+        'David',
+        'Johnson',
+        'david.johnson@example.com',
+        '1988-02-17',
+        '2018-01-25',
+        2
+    ),
+    (
+        789123456,
+        'Clerk',
+        'Eve',
+        'Davis',
+        'eve.davis@example.com',
+        '1995-06-30',
+        '2020-09-15',
+        1
+    ),
+    (
+        654987321,
+        'Cook',
+        'Frank',
+        'Miller',
+        'frank.miller@example.com',
+        '1979-12-10',
+        '2008-04-18',
+        2
+    ),
+    (
+        159357258,
+        'Cashier',
+        'Grace',
+        'Wilson',
+        'grace.wilson@example.com',
+        '1992-09-18',
+        '2017-07-13',
+        1
+    ),
+    (
+        753951456,
+        'Cashier',
+        'Hank',
+        'Moore',
+        'hank.moore@example.com',
+        '1987-03-22',
+        '2016-05-06',
+        2
+    ),
+    (
+        852963741,
+        'Supervisor',
+        'Ivy',
+        'Taylor',
+        'ivy.taylor@example.com',
+        '1983-08-14',
+        '2011-11-28',
+        1
+    ),
+    (
+        963852741,
+        'Cook',
+        'Jake',
+        'Anderson',
+        'jake.anderson@example.com',
+        '1998-01-09',
+        '2021-02-11',
+        2
     );
-SELECT *
-FROM menu;
-SELECT *
-FROM inventory;
-
