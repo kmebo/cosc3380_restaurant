@@ -9,6 +9,7 @@ const employeeRemoveButton = document.getElementById('removeEmployee-button')
 const employeeAddButton = document.getElementById('addEmployee-button');
 const employeeEditButton = document.getElementById('editEmployee-button');
 const orderInventoryButton = document.getElementById('orderInventory-button');
+const restaurantButton = document.getElementById('restaurant-button');
 
 employeeButton.addEventListener('click', () => {
     let items = document.getElementsByClassName('employee-container');
@@ -25,6 +26,10 @@ employeeButton.addEventListener('click', () => {
     }
     items = document.getElementsByClassName('inventory-container');
     for(let item of items){
+        item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('restaurant-container');
+    for (let item of items) {
         item.style.display = 'none';
     }
 });
@@ -46,6 +51,10 @@ departmentButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'none';
     }
+    items = document.getElementsByClassName('restaurant-container');
+    for (let item of items) {
+        item.style.display = 'none';
+    }
 });
 
 financesButton.addEventListener('click', () => {
@@ -65,6 +74,10 @@ financesButton.addEventListener('click', () => {
     for(let item of items){
         item.style.display = 'none';
     }
+    items = document.getElementsByClassName('restaurant-container');
+    for (let item of items) {
+        item.style.display = 'none';
+    }
 });
 
 inventoryButton.addEventListener('click', () => {
@@ -82,6 +95,34 @@ inventoryButton.addEventListener('click', () => {
     }
     items = document.getElementsByClassName('inventory-container');
     for(let item of items){
+        item.style.display = 'block';
+    }
+    items = document.getElementsByClassName('restaurant-container');
+    for (let item of items) {
+        item.style.display = 'none';
+    }
+});
+
+restaurantButton.addEventListener('click', () => {
+    let items = document.getElementsByClassName('employee-container');
+    for (let item of items) {
+        item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('department-container');
+    for (let item of items) {
+        item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('finances-container');
+    for (let item of items) {
+        item.style.display = 'none';
+    }
+    items = document.getElementsByClassName('inventory-container');
+    for (let item of items) {
+        item.style.display = 'none';
+    }
+
+    items = document.getElementsByClassName('restaurant-container');
+    for (let item of items) {
         item.style.display = 'block';
     }
 });
@@ -310,6 +351,31 @@ async function orderInventory(item_amount, item_name){
     }
 }
 
+document.getElementById("add-restaurant-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const location = document.getElementById("location").value;
+    const openDate = document.getElementById("open-date").value;
+    const sales = parseFloat(document.getElementById("sales").value);
+    const totalCustomers = parseFloat(document.getElementById("total-customers").value);
+    const owner = document.getElementById("owner").value;
+    const manager = document.getElementById("manager").value;
+
+    try {
+        const response = await fetch("http://localhost:3000/restaurants", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                location: location,
+                open_date: openDate,
+                sales: sales,
+                total_customers: totalCustomers,
+                owner: owner,
+                manager: manager,
+            }),
+        });
+});
+
 window.onload = function() {
     let items = document.getElementsByClassName('employee-container');
     for(let item of items){
@@ -328,6 +394,11 @@ window.onload = function() {
 
     items = document.getElementsByClassName('inventory-container');
     for(let item of items){
+        item.style.display = 'none';
+    }
+
+        items = document.getElementsByClassName('restaurant-container');
+    for (let item of items) {
         item.style.display = 'none';
     }
     fetchEmployee();
