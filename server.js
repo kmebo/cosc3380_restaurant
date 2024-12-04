@@ -93,7 +93,7 @@ app.get('/employee', async (req, res) => {
 // Fetch returant attributes from database
 app.get('/restaurants', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM resturant');
+        const result = await pool.query('SELECT * FROM restaurant');
         res.json(result.rows);
     } catch (err) {
         console.error(err.message);
@@ -309,6 +309,22 @@ app.put('/inventory/:name', async (req, res) => {
     try {
         await pool.query('UPDATE inventory SET item_amount = item_amount + $1, last_restocked = CURRENT_DATE WHERE item_name = $2', [item_amount, item_name]);
         res.sendStatus(200);
+    } catch (err) {
+        console.error(err.message);
+        res.sendStatus(500);
+    }
+});
+
+
+app.post('/restaurants', async (req, res) => {
+    const { location, open_date, sales, total_customers, owner, manager } = req.body;
+
+    try {
+        await pool.query(
+            'INSERT INTO restaurant (location, open_date, sales, total_customers, owner, manager) VALUES ($1, $2, $3, $4, $5, $6)',
+            [location, open_date, sales, total_customers, owner, manager]
+        );
+        res.sendStatus(201);
     } catch (err) {
         console.error(err.message);
         res.sendStatus(500);
