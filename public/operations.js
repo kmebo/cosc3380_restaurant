@@ -374,6 +374,10 @@ document.getElementById("add-restaurant-form").addEventListener("submit", async 
                 manager: manager,
             }),
         });
+    } catch (error) {
+        console.error("Error:", error);
+        alert('An error has occurred');
+    }
 });
 
 window.onload = function() {
